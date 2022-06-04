@@ -25,8 +25,13 @@
 </template>
 <script lang="ts">
 import TopNav from '../components/TopNav.vue'
+import {inject, Ref} from 'vue';
 export default {
-  components: {TopNav}
+  components: {TopNav},
+  setup(){
+    const menuVisible = inject<Ref<boolean>>('xxx') // 相当于 get
+    console.log('Doc 获取到的 menuVisible 为: ' + menuVisible.value);
+  }
 }
 </script>
 
