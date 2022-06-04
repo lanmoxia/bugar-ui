@@ -16,4 +16,6 @@ const router = createRouter({
     {path: '/', component: Test}
   ]
 })
-createApp(App).mount('#app')
+const app = createApp(App)
+app.use(router) // 使用 app.use
+app.mount('#app')
