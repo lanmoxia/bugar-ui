@@ -3,7 +3,7 @@ import App from './App.vue'
 import './index.css'
 import {createWebHashHistory, createRouter} from 'vue-router'
 import Test from './components/Test.vue'
-
+import Test2 from './components/Test2.vue'
 // 入口文件
 const history = createWebHashHistory()
 // main.js 改为 main.ts 文件 提示应该有一个参数
@@ -13,7 +13,8 @@ const history = createWebHashHistory()
 const router = createRouter({
   history: history,
   routes: [
-    {path: '/', component: Test}
+    {path: '/', component: Test},
+    {path: '/test2', component: Test2}
   ]
 })
 const app = createApp(App)
