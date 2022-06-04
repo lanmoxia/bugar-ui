@@ -1,5 +1,5 @@
 <template>
   <div>
-    Switch 示例文档
+    Dialog 示例文档
   </div>
 </template>
