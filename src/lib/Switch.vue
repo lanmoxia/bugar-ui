@@ -7,13 +7,11 @@
 <script lang="ts">
 export default {
   props: {
-    value: Boolean, // 这里类型是JS的不是TS的 用大写Boolean
-    xxx: String
+    value: Boolean
   },
   setup(props, context){
     const toggle = () => {
       context.emit('update:value', !props.value)
-      context.emit('update:xxx', 'newValue')
     }
     return{toggle: toggle}
   }
