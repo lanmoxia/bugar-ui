@@ -22,67 +22,78 @@
       <main>
         <router-view/>
       </main>
-      </div>
     </div>
+  </div>
 </template>
+
 <script lang="ts">
-import TopNav from '../components/TopNav.vue'
+import TopNav from '../components/TopNav.vue';
 import {inject, Ref} from 'vue';
+
 export default {
   components: {TopNav},
-  setup(){
-    const menuVisible = inject<Ref<boolean>>('menuVisible') // 相当于 get
-    return {menuVisible}
+  setup() {
+    const menuVisible = inject<Ref<boolean>>('menuVisible'); // 相当于 get
+    return {menuVisible};
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  .layout {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    >.nav {
-      flex-shrink: 0;
-    }
-    >.content {
-      flex-grow: 1;
-      padding-top: 60px;
-      padding-left: 156px;
-      @media (max-width: 500px) {
-        padding-left: 0;
-      }
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  > .nav {
+    flex-shrink: 0;
+  }
+
+  > .content {
+    flex-grow: 1;
+    padding-top: 60px;
+    padding-left: 156px;
+    @media (max-width: 500px) {
+      padding-left: 0;
     }
   }
-  .content {
-    display: flex;
-    > aside {
-      flex-shrink: 0;
-    }
-    > main {
-      flex-grow: 1;
-      padding: 16px;
-      background: lightgreen;
+}
+
+.content {
+  display: flex;
+
+  > aside {
+    flex-shrink: 0;
+  }
+
+  > main {
+    flex-grow: 1;
+    padding: 16px;
+    background: lightgreen;
+  }
+}
+
+aside {
+  background: lightblue;
+  width: 150px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 70px 16px 16px;
+  height: 100%;
+
+  > h2 {
+    margin-bottom: 4px;
+  }
+
+  > ol {
+    > li {
+      padding: 4px 0;
     }
   }
-  aside {
-    background: lightblue;
-    width: 150px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: 70px 16px 16px;
-    height: 100%;
-    > h2 {
-      margin-bottom: 4px;
-    }
-    > ol {
-      > li {
-        padding: 4px 0;
-      }
-    }
-  }
-  main {
-    overflow: auto;
-  }
+}
+
+main {
+  overflow: auto;
+}
 </style>
