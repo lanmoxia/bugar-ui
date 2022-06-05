@@ -2,7 +2,6 @@
   <button @click="toggle" :class="{checked: value}">
     <span></span>
   </button>
-  <div>{{value}}</div>
 </template>
 
 <script lang="ts">
@@ -13,9 +12,6 @@ export default {
   },
   setup(props, context){
     const toggle = () => {
-      // 这里的事件名规则：
-      // update: 这里必须是 props 中对应的属性名 也就是 'update:value'
-      // 比如 props 还接受一个 xxx 这里触发事件就是 'update:xxx'
       context.emit('update:value', !props.value)
       context.emit('update:xxx', 'newValue')
     }
@@ -31,7 +27,7 @@ export default {
     height: $h;
     width: $h*2;
     border: none;
-    background: gray;
+    background: #bfbfbf;
     border-radius: $h/2;
     position: relative;
   }
@@ -43,15 +39,21 @@ export default {
     width: $h2;
     background: white;
     border-radius: $h2 / 2;
-    transition: left 250ms;
+    transition: all 250ms;
   }
   button.checked {
-    background: blue;
+    background: #1890ff;
   }
   button.checked > span {
     left: calc(100% - #{$h2} - 2px);
   }
   button:focus {
     outline: none;
+  }
+  button:active{
+    > span {width: $h2 + 4px;}
+  }
+  button.checked:active{
+    > span {width: $h2 + 4px; margin-left: -4px;}
   }
 </style>
