@@ -8,13 +8,16 @@
 <script lang="ts">
 export default {
   props: {
-    value: Boolean // 这里类型是JS的不是TS的 用大写Boolean
+    value: Boolean, // 这里类型是JS的不是TS的 用大写Boolean
+    xxx: String
   },
   setup(props, context){
     const toggle = () => {
-      // toggle 的作用就是把当前值取反 通过 'xxx' 告诉父组件
-      context.emit('xxx', !props.value)
-      // 相当于 Vue2 的 this.emit()
+      // 这里的事件名规则：
+      // update: 这里必须是 props 中对应的属性名 也就是 'update:value'
+      // 比如 props 还接受一个 xxx 这里触发事件就是 'update:xxx'
+      context.emit('update:value', !props.value)
+      context.emit('update:xxx', 'newValue')
     }
     return{toggle: toggle}
   }
