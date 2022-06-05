@@ -1,18 +1,22 @@
 <template>
-  <button @click="toggle" :class="{checked: checked}">
+  <button @click="toggle" :class="{checked: value}">
     <span></span>
   </button>
+  <div>{{value}}</div>
 </template>
 
 <script lang="ts">
-import {ref} from 'vue';
 export default {
-  setup(){
-    const checked = ref(false)
+  props: {
+    value: Boolean // 这里类型是JS的不是TS的 用大写Boolean
+  },
+  setup(props, context){
     const toggle = () => {
-      checked.value = !checked.value
+      // toggle 的作用就是把当前值取反 通过 'xxx' 告诉父组件
+      context.emit('xxx', !props.value)
+      // 相当于 Vue2 的 this.emit()
     }
-    return{checked:checked, toggle: toggle}
+    return{toggle: toggle}
   }
 }
 </script>
