@@ -1,6 +1,6 @@
 <template>
   <template v-if="visible">
-    <div class="gugu-dialog-overlay"></div>
+    <div class="gugu-dialog-overlay" @click="onClickOverlay"></div>
     <div class="gugu-dialog-wrapper">
       <div class="gugu-dialog">
         <header>
@@ -28,15 +28,21 @@ export default {
     visible: {
       type: Boolean,
       default: false
+    },
+    closeOnClickOverlay: { // 设置 close 开关
+      type: Boolean,
+      default: true
     }
   },
   setup(props, context){
     const close = () => {
       context.emit('update:visible', false)
     }
-    return {
-      close
+    // 用户不一定需要点哪里都关闭 这里用户可以自己设置
+    const onClickOverlay = () => {
+      if(props.closeOnClickOverlay){close()}
     }
+    return {close, onClickOverlay}
   }
 }
 </script>

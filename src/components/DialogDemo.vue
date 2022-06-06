@@ -3,7 +3,7 @@
   <h1>示例1</h1>
   <Button @click="toggle">toggle</Button>
   <!--<Dialog :visible="x" @update:visible="x = $event"></Dialog>-->
-  <Dialog v-model:visible="x"></Dialog>
+  <Dialog v-model:visible="x" :close-on-click-overlay="false"></Dialog>
 </template>
 <script>
 import Dialog from '../lib/Dialog.vue'
