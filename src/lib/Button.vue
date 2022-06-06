@@ -1,8 +1,8 @@
 <template>
-  <!--想要事件或传值到这里的 button 上-->
-  <!--② 在 button 上使用 v-bind 穿过来的事件或值是一个对象 $attrs-->
-  <div class="red">
-    <button v-bind="$attrs">
+  <!--这样传过来的值绑定了到 div 上-->
+  <!--剩余的两个事件绑定到了 button 上-->
+  <div class="red" :size="size">
+    <button v-bind="rest">
       <slot/>
     </button>
   </div>
@@ -10,7 +10,12 @@
 
 <script lang="ts">
 export default {
-  inheritAttrs: false // ① 外部的事件或传的值 就不能默认给这里的任何元素绑定事件了
+  inheritAttrs: false,
+  setup(props, context){
+    const {attrs} = context; // 从 context 得到 attrs
+    const {size, ...rest} = attrs // size 取出来 剩余的都放到 rest 上
+    return {size, rest}
+  }
 }
 </script>
 

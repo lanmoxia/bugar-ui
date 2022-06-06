@@ -3,7 +3,7 @@
     <div>Button 示例</div>
     <h1>示例1</h1>
     <div>
-      <Button @click="xxx" @focus="xxx" @mouseover="xxx" size="small">
+      <Button @click="xxx" @focus="xxx" @mouseover="xxx" size="big">
         你好
       </Button>
     </div>
