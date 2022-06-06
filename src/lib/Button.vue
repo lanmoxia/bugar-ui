@@ -1,6 +1,6 @@
 <template>
     <button class="gugu-button"
-            :class="{[`theme-${theme}`]: theme}">
+            :class="{[`gugu-theme-${theme}`]: theme}">
       <slot/>
     </button>
 </template>
@@ -17,7 +17,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 $h: 32px;
 $border-color: #d9d9d9;
 $color: #333;
@@ -37,6 +37,7 @@ $radius: 4px;
   border: 1px solid $border-color;
   border-radius: $radius;
   box-shadow: 0 1px 0 fade-out(black, 0.95);
+  //&+& 是 gugu-button+gugu-button 的意思
   & + & {
     margin-left: 8px;
   }
