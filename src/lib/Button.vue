@@ -1,5 +1,6 @@
 <template>
-    <button class="gugu-button" :class="classes">
+    <!--因为 props 写了 disabled 所以不会继承 这里还要绑定下 disabled-->
+    <button class="gugu-button" :class="classes" :disabled="disabled">
       <slot/>
     </button>
 </template>
@@ -21,15 +22,20 @@ export default {
     level: {
       type: String,
       default: 'normal'
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   setup(props){
-    const {theme, size, level} = props
+    const {theme, size, level, disabled} = props
     const classes = computed(() => {
       return {
         [`gugu-theme-${theme}`]: theme,
         [`gugu-size-${size}`]: size,
-        [`gugu-level-${level}`]: level
+        [`gugu-level-${level}`]: level,
+        [`gugu-disabled-${disabled}`]: disabled
       }
     })
     return {classes}
@@ -44,6 +50,7 @@ $color: #333;
 $blue: #40a9ff;
 $radius: 4px;
 $red: red;
+$grey: gray;
 .gugu-button {
   box-sizing: border-box;
   height: $h;
@@ -145,6 +152,21 @@ $red: red;
       &:focus {
         color: darken($red, 10%);
       }
+    }
+  }
+  &.gugu-theme-button {
+    &[disabled] {
+      cursor: not-allowed;
+      color: $grey;
+      &:hover {
+        border-color: $grey;
+      }
+    }
+  }
+  &.gugu-theme-link, &.gugu-theme-text {
+    &[disabled] {
+      cursor: not-allowed;
+      color: $grey;
     }
   }
 }
