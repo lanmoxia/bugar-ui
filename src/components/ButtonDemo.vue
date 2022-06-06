@@ -3,9 +3,9 @@
     <div>Button 示例</div>
     <h1>示例1</h1>
     <div>
-      <Button @click="xxx"
-        @focus="xxx" @mouseover="xxx"
-      >你好</Button>
+      <Button @click="xxx" @focus="xxx" @mouseover="xxx" size="small">
+        你好
+      </Button>
     </div>
   </div>
 </template>
