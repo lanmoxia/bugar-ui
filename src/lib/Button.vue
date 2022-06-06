@@ -1,6 +1,7 @@
 <template>
   <div>
-    <button>
+    <!--共有类名和动态类名-->
+    <button class="gugu-button" :class="`theme-${theme}`">
       <slot/>
     </button>
   </div>
@@ -8,7 +9,9 @@
 
 <script lang="ts">
 export default {
-
+  props: {
+    theme: String
+  }
 }
 </script>
 
