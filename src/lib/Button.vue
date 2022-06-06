@@ -14,7 +14,8 @@ export default {
   // 这样设置默认值 可以解决第一个 button 是 theme-undefined 的问题
   props: {
     theme: {
-      type: String
+      type: String,
+      default: 'button'
     }
   }
 }
