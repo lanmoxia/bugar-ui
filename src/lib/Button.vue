@@ -1,18 +1,33 @@
 <template>
-    <button class="gugu-button"
-            :class="{[`gugu-theme-${theme}`]: theme}">
+    <button class="gugu-button" :class="classes">
       <slot/>
     </button>
 </template>
 
 <script lang="ts">
+import {computed} from 'vue';
+
 export default {
   // 这样设置默认值 可以解决第一个 button 是 theme-undefined 的问题
   props: {
     theme: {
       type: String,
       default: 'button'
+    },
+    size: {
+      type: String,
+      default: 'normal'
     }
+  },
+  setup(props){
+    const {theme, size} = props
+    const classes = computed(() => {
+      return {
+        [`gugu-theme-${theme}`]: theme,
+        [`gugu-size-${size}`]: size
+      }
+    })
+    return {classes}
   }
 }
 </script>
@@ -67,6 +82,16 @@ $radius: 4px;
     &:hover,&:focus{
       background: darken(white, 5%);;
     }
+  }
+  &.gugu-size-big {
+    font-size: 24px;
+    height: 48px;
+    padding: 0 16px;
+  }
+  &.gugu-size-small {
+    font-size: 12px;
+    height: 20px;
+    padding: 0 4px;
   }
 }
 </style>
