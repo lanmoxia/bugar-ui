@@ -1,5 +1,5 @@
 <template>
-  <button @click="toggle" :class="{'gugu-checked': value}">
+  <button class="gugu-switch" @click="toggle" :class="{'gugu-checked': value}">
     <span></span>
   </button>
 </template>
@@ -21,7 +21,7 @@ export default {
 <style lang="scss">
   $h: 22px;
   $h2: $h - 4px;
-  button {
+  .gugu-switch { // 最小知识原则 这里是 UI 库 不能使用 button
     height: $h;width: $h*2;border: none;background: #bfbfbf;
     border-radius: $h/2;position: relative;
     > span {
