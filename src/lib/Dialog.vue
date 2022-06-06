@@ -3,7 +3,10 @@
     <div class="gugu-dialog-overlay"></div>
     <div class="gugu-dialog-wrapper">
       <div class="gugu-dialog">
-        <header>标题 <span class="gugu-dialog-close"></span></header>
+        <header>
+          标题
+          <span @click="close" class="gugu-dialog-close"></span>
+        </header>
         <main>
           <p>第一行字</p>
           <p>第二行字</p>
@@ -25,6 +28,14 @@ export default {
     visible: {
       type: Boolean,
       default: false
+    }
+  },
+  setup(props, context){
+    const close = () => {
+      context.emit('update:visible', false)
+    }
+    return {
+      close
     }
   }
 }
