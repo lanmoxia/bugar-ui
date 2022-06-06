@@ -48,6 +48,7 @@
     <Button theme="text" disabled>禁用按钮</Button>
     <h1>示例5</h1>
     <Button loading>加载中</Button>
+    <Button>加载完成</Button>
   </div>
 </template>
 <script lang="ts">
