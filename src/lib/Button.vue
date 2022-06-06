@@ -1,6 +1,12 @@
 <template>
-  <!--vue 会把外部的事件传到这里的根元素实现事件绑定-->
-  <button>
-    <slot/>
-  </button>
+  <!--这里根元素变成 div 了 事件也就绑定到了 div 上-->
+  <div class="red">
+    <button>
+      <slot/>
+    </button>
+  </div>
 </template>
+
+<style lang="scss" scoped>
+  .red{border: 1px solid red;}
+</style>
