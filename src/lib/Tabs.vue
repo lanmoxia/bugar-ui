@@ -13,15 +13,13 @@
 
 <script lang="ts">
 import Tab from './Tab.vue'
+import {computed} from 'vue';
 export default {
   props: {
     selected: {
       type: String
     }
   },
-  // 当切换导航的时候会导致 selected 变化
-  // selected 变化以后  在页面挂载的时候 setup 中的 currenSelected 只会计算一次 后边不会在计算
-  // 所以导航会切换 导航内的内容不会跟着切换
   setup(props, context){
     const defaults = context["slots"].default()
     defaults.forEach((tag) => {
@@ -32,13 +30,13 @@ export default {
     const titles = defaults.map((tag) => {
       return tag["props"].title
     })
-    // 我们只需要知道一个元素有没有 selected 没必要遍历 N 个元素
-    // 通过 filter 赛选出有 selected 的元素
-    // filter 返回的是一个数组 只有一个元素也会返回数组 所以这里要用 [0]
-    const currentSelected = defaults.filter((tag) => {
-      return tag["props"].title = props.selected
-    })[0]
-    // selected 是外部传过来的 不能修改 props 通过事件触发
+    // 把 currentSelected 升级为计算属性
+    // Vue3 Bug 导致不能解决问题
+    const currentSelected = computed(() => {
+      return defaults.filter((tag) => {
+        return tag["props"].title = props.selected
+      })[0]
+    })
     const select = (title: string) => {
       context.emit("update:selected", title)
     }
