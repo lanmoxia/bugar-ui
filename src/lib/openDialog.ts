@@ -9,9 +9,12 @@ export const openDialog = (options) => {
   // 把 Dialog 挂载到 div 上
   createApp({
     render(){
-      return h(Dialog, {visible: true})
+      return h(
+        Dialog,
+        {visible: true},
+        {title:title, content: content}
+      )
     }
   }).mount(div)
 }
-// 解决点击无反应：使用 vue的h函数，h函数能接受多个参数
-// 可以把 visible 属性也传过去，这样就解决了点击无反应的问题
+// 传入 title 和 content
