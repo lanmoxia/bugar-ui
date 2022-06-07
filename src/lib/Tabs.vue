@@ -3,12 +3,10 @@
     <div class="gugu-tabs-nav">
       <div class="gugu-tabs-nav-item"
            :class="{selected: t === selected}"
-           v-for="(t, index) in titles" :key="index">{{t}}</div>
+           v-for="(t, index) in titles" :key="index" @click="select(t)">{{t}}</div>
     </div>
     <div class="gugu-tabs-content div">
-      <!--Vue 不推荐 v-for 和 v-if 写在一起 用不了-->
-      <component v-for=" (c, index) in defaults" :key="index" :is="c"
-      v-if="c.props.title === selected"/>
+      <component class="gugu-tabs-content-items" :is="currentSelected"/>
     </div>
   </div>
 </template>
@@ -21,8 +19,10 @@ export default {
       type: String
     }
   },
+  // 当切换导航的时候会导致 selected 变化
+  // selected 变化以后  在页面挂载的时候 setup 中的 currenSelected 只会计算一次 后边不会在计算
+  // 所以导航会切换 导航内的内容不会跟着切换
   setup(props, context){
-    // 通过 context.slots.default() 的结果 来获取到外部传入的子内容
     const defaults = context["slots"].default()
     defaults.forEach((tag) => {
       if(tag.type !== Tab){
@@ -30,11 +30,19 @@ export default {
       }
     })
     const titles = defaults.map((tag) => {
-      //console.log({...tag}); // 通过遍历看到属性 props 下有 title
-      //console.log(tag["props"].title);// tag.props.title === tag["props"].title
       return tag["props"].title
     })
-    return {defaults, titles}
+    // 我们只需要知道一个元素有没有 selected 没必要遍历 N 个元素
+    // 通过 filter 赛选出有 selected 的元素
+    // filter 返回的是一个数组 只有一个元素也会返回数组 所以这里要用 [0]
+    const currentSelected = defaults.filter((tag) => {
+      return tag["props"].title = props.selected
+    })[0]
+    // selected 是外部传过来的 不能修改 props 通过事件触发
+    const select = (title: string) => {
+      context.emit("update:selected", title)
+    }
+    return {defaults, titles, currentSelected, select}
   }
 }
 </script>
