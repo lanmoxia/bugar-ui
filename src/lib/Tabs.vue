@@ -6,7 +6,12 @@
            v-for="(t, index) in titles" :key="index" @click="select(t)">{{t}}</div>
     </div>
     <div class="gugu-tabs-content div">
-      <component class="gugu-tabs-content-items" :is="currentSelected"/>
+      <!--v-if 和 v-for 不能一起使用 这里用 class 来判断是否选中-->
+      <!--然后使用 css 来隐藏没有 selected 的-->
+      <component class="gugu-tabs-content-item"
+                 :class="{selected: c.props.title === selected}"
+                 v-for="c in defaults"
+                 :is="c"/>
     </div>
   </div>
 </template>
@@ -68,6 +73,12 @@ $border-color: #d9d9d9;
   }
   &-content {
     padding: 8px 0;
+    &-item{
+      display: none;
+      &.selected{
+        display: block;
+      }
+    }
   }
 }
 </style>
