@@ -12,11 +12,14 @@
         <strong>这里是加粗的提示</strong>
       </template>
     </Dialog>
+  <h1>示例2</h1>
+  <Button @click="showDialog">show</Button>
 </template>
 <script>
 import Dialog from '../lib/Dialog.vue'
 import Button from '../lib/Button.vue'
 import {ref} from 'vue'
+import {openDialog} from '../lib/openDialog.ts'
 export default {
   components: {Button, Dialog},
   setup(){
@@ -24,13 +27,15 @@ export default {
     const toggle = () => {
       x.value = !x.value
     }
-    const f1 = () => {
-      return false
+    const f1 = () => {return false}
+    const f2 = () => {}
+    const showDialog = () => {
+      openDialog({
+        title: "标题",
+        content: "你好"
+      })
     }
-    const f2= () => {
-
-    }
-    return{x, toggle, f1, f2}
+    return{x, toggle, f1, f2, showDialog}
 
   }
 }
