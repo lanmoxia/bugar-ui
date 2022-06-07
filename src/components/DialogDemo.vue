@@ -3,8 +3,10 @@
   <h1>示例1</h1>
   <Button @click="toggle">toggle</Button>
   <Dialog v-model:visible="x" :close-on-click-overlay="false"
-          :ok="f1" :cancel="f2"
-  ></Dialog>
+          :ok="f1" :cancel="f2">
+    <div>hi</div>
+    <div>hello</div>
+  </Dialog>
 </template>
 <script>
 import Dialog from '../lib/Dialog.vue'
