@@ -1,11 +1,10 @@
 <template>
-    <div>Tabs 示例文档</div>
-    <h1>示例1</h1>
-    <Tabs>
-      <!--这里使用非 Tab 就会报错-->
-      <div title="导航1">内容1</div>
-      <Tab title="导航2">内容2</Tab>
-    </Tabs>
+  <div>Tabs 示例文档</div>
+  <h1>示例1</h1>
+  <Tabs>
+    <Tab title="导航1">内容1</Tab>
+    <Tab title="导航2">内容2</Tab>
+  </Tabs>
 </template>
 <script>
 import Tabs from '../lib/Tabs.vue'

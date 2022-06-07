@@ -1,9 +1,8 @@
 <template>
   <div>
     Tabs 组件
-<!--{{defaults}} 这种展示不了 下边方式可以展示-->
-    <component :is="defaults[0]"/>
-    <component :is="defaults[1]"/>
+    <!--TabDemo 中嵌套了 Tab 嵌套了内容 这里不能使用插槽-->
+    <component v-for=" c in defaults" :is="c"/>
   </div>
 </template>
 
