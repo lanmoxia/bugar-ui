@@ -6,7 +6,9 @@
            v-for="(t, index) in titles" :key="index">{{t}}</div>
     </div>
     <div class="gugu-tabs-content div">
-      <component v-for=" (c, index) in defaults" :key="index" :is="c"/>
+      <!--Vue 不推荐 v-for 和 v-if 写在一起 用不了-->
+      <component v-for=" (c, index) in defaults" :key="index" :is="c"
+      v-if="c.props.title === selected"/>
     </div>
   </div>
 </template>
