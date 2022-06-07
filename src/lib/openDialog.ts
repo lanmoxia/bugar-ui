@@ -1,7 +1,7 @@
 import Dialog from './Dialog.vue'
 import {createApp, h} from 'vue'; //提供挂载的 API
 export const openDialog = (options) => {
-  const {title, content} = options
+  const {title, content, ok, cancel} = options
   // 直接把 Dialog 放到 body 中会覆盖之前的
   // 这里创建一个临时 div 放到 body 上
   const div = document.createElement('div')
@@ -16,6 +16,8 @@ export const openDialog = (options) => {
       return h(
         Dialog,
         {
+          ok,
+          cancel,
           visible: true,
           'onUpdate:visible': (newVisible) => { // 监听 visible 事件
             if(newVisible === false){
