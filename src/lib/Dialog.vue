@@ -32,6 +32,12 @@ export default {
     closeOnClickOverlay: { // 设置 close 开关
       type: Boolean,
       default: true
+    },
+    ok: {
+      type: Function
+    },
+    cancel: {
+      type: Function
     }
   },
   setup(props, context){
@@ -43,8 +49,14 @@ export default {
       if(props.closeOnClickOverlay){close()}
     }
     const ok = () => {
-      context.emit('ok')
-      close()
+      // 这里不能直接 close 如果想实现用户输入一些内容才能 close 怎么做
+      // 1. 获取事件返回值 不过事件返回值没有返回值是 undefined
+      // 2. 可以再外部传入一个函数 函数返回 true/false
+      // 3. 这里接收函数 依据返回值决定是否 close()
+      // if(props.ok && props.ok() !== false){ // 如果ok存在，然后ok的返回值不等false就执行close
+      if(props.ok?.() !== false){ // 简写
+        close()
+      }
     }
     const cancel = () => {
       context.emit('cancel')
