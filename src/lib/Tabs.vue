@@ -1,8 +1,9 @@
 <template>
   <div>
-    Tabs 组件
-    <!--TabDemo 中嵌套了 Tab 嵌套了内容 这里不能使用插槽-->
-    <component v-for=" c in defaults" :is="c"/>
+    <div>
+      <div v-for="(t, index) in titles" :key="index">{{t}}</div>
+    </div>
+    <component v-for=" (c, index) in defaults" :key="index" :is="c"/>
   </div>
 </template>
 
@@ -17,7 +18,12 @@ export default {
         throw new Error("Tabs 的子标签必须是 Tab")
       }
     })
-    return {defaults}
+    const titles = defaults.map((tag) => {
+      //console.log({...tag}); // 通过遍历看到属性 props 下有 title
+      //console.log(tag["props"].title);// tag.props.title === tag["props"].title
+      return tag["props"].title
+    })
+    return {defaults, titles}
   }
 }
 </script>
