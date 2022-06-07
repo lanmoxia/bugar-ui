@@ -1,17 +1,22 @@
 <template>
   <div>Dialog 示例</div>
   <h1>示例1</h1>
-  <Button @click="toggle">toggle</Button>
-  <Dialog v-model:visible="x" :close-on-click-overlay="false"
-          :ok="f1" :cancel="f2">
-    <template v-slot:content>
-      <strong>这里加粗的</strong>
-      <div>这里正常的</div>
-    </template>
-    <template v-slot:title>
-      <strong>这里是加粗的提示</strong>
-    </template>
-  </Dialog>
+  <div style="position: relative; z-index: 1">
+    <Button @click="toggle">toggle</Button>
+    <Dialog v-model:visible="x" :close-on-click-overlay="false"
+            :ok="f1" :cancel="f2">
+      <template v-slot:content>
+        <strong>这里加粗的</strong>
+        <div>这里正常的</div>
+      </template>
+      <template v-slot:title>
+        <strong>这里是加粗的提示</strong>
+      </template>
+    </Dialog>
+  </div>
+  <div style="position: relative; z-index: 2;
+      width: 300px; height: 300px; background: red;">
+  </div>
 </template>
 <script>
 import Dialog from '../lib/Dialog.vue'

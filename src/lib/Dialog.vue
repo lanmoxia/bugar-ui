@@ -4,7 +4,7 @@
     <div class="gugu-dialog-wrapper">
       <div class="gugu-dialog">
         <header>
-         <slot name="title"/>
+          <slot name="title"/>
           <span @click="close" class="gugu-dialog-close"></span>
         </header>
         <main>
