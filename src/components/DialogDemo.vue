@@ -4,8 +4,13 @@
   <Button @click="toggle">toggle</Button>
   <Dialog v-model:visible="x" :close-on-click-overlay="false"
           :ok="f1" :cancel="f2">
-    <div>hi</div>
-    <div>hello</div>
+    <template v-slot:content>
+      <strong>这里加粗的</strong>
+      <div>这里正常的</div>
+    </template>
+    <template v-slot:title>
+      <strong>这里是加粗的提示</strong>
+    </template>
   </Dialog>
 </template>
 <script>
