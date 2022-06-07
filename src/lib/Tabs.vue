@@ -1,7 +1,9 @@
 <template>
   <div class="gugu-tabs">
     <div class="gugu-tabs-nav">
-      <div class="gugu-tabs-nav-item" v-for="(t, index) in titles" :key="index">{{t}}</div>
+      <div class="gugu-tabs-nav-item"
+           :class="{selected: t === selected}"
+           v-for="(t, index) in titles" :key="index">{{t}}</div>
     </div>
     <div class="gugu-tabs-content div">
       <component v-for=" (c, index) in defaults" :key="index" :is="c"/>
@@ -12,6 +14,11 @@
 <script lang="ts">
 import Tab from './Tab.vue'
 export default {
+  props: {
+    selected: {
+      type: String
+    }
+  },
   setup(props, context){
     // 通过 context.slots.default() 的结果 来获取到外部传入的子内容
     const defaults = context["slots"].default()
