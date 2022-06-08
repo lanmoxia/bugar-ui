@@ -1,6 +1,6 @@
 <template>
   <div class="gugu-tabs">
-    <div class="gugu-tabs-nav">
+    <div class="gugu-tabs-nav" ref="container">
       <!--复杂的表达式 ref 前边需要加 :ref-->
       <div class="gugu-tabs-nav-item"
            :class="{selected: t === selected}"
@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import Tab from './Tab.vue'
-import {computed, ref, onMounted} from 'vue';
+import {computed, ref, onMounted, onUpdated} from 'vue';
 export default {
   props: {
     selected: {
@@ -28,21 +28,30 @@ export default {
   setup(props, context){
     const navItems = ref<HTMLDivElement[]>([])
     const indicator = ref<HTMLDivElement>(null)
-    // 挂载后通过三个点操作符可以看到 navItems.value 是两个导航
+    const container = ref<HTMLDivElement>(null)
+    // 挂载只会执行一次 所以点击切换导航 蓝色的线不会更新跟随
     onMounted(() => {
       const divs = navItems.value
-      // 筛选出被选中的 div
       const result = divs.filter(div => div.classList.contains('selected'))[0]
-      // find 在古老的浏览器上不支持
-      // const result = divs.find(div => div.classList.contains('selected'))
-      //console.log(result.getBoundingClientRect());
-      // 获取到选中项的宽度
       const {width} = result.getBoundingClientRect()
-      // 上边再定义一个 ref  然后把宽度传给蓝色的线条 ref="indicator"
-      // 获取
-      console.log(indicator);
-      console.log(indicator.value);
       indicator.value.style.width = width + 'px'
+
+      const {left: left1} = container.value.getBoundingClientRect()// gugu-tabs-nav 的 left
+      const {left: left2} = result.getBoundingClientRect()//选中项的 left
+      const left = left2 - left1
+      indicator.value.style.left = left + 'px'
+    })
+    // 使用 onUpdated 更新钩子函数达到导航切换更新的问题
+    onUpdated(() => {
+      const divs = navItems.value
+      const result = divs.filter(div => div.classList.contains('selected'))[0]
+      const {width} = result.getBoundingClientRect()
+      indicator.value.style.width = width + 'px'
+
+      const {left: left1} = container.value.getBoundingClientRect()// gugu-tabs-nav 的 left
+      const {left: left2} = result.getBoundingClientRect()//选中项的 left
+      const left = left2 - left1
+      indicator.value.style.left = left + 'px'
     })
     const defaults = context["slots"].default()
     defaults.forEach((tag) => {
@@ -61,7 +70,7 @@ export default {
     const select = (title: string) => {
       context.emit("update:selected", title)
     }
-    return {defaults, titles, currentSelected, select, navItems, indicator}
+    return {defaults, titles, currentSelected, select, navItems, indicator, container}
   }
 }
 </script>
