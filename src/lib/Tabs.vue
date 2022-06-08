@@ -1,11 +1,10 @@
 <template>
   <div class="gugu-tabs">
     <div class="gugu-tabs-nav" ref="container">
-      <!--复杂的表达式 ref 前边需要加 :ref-->
       <div class="gugu-tabs-nav-item"
            :class="{selected: t === selected}"
            v-for="(t, index) in titles" :key="index"
-           :ref="el => {if(el) navItems[index] = el}" @click="select(t)"
+           :ref="el => {if(t === selected) selectedItem = el}" @click="select(t)"
         >{{t}}</div>
       <div class="gugu-tabs-nav-indicator" ref="indicator"></div>
     </div>
@@ -26,23 +25,22 @@ export default {
     }
   },
   setup(props, context){
-    const navItems = ref<HTMLDivElement[]>([])
+    //优化前：通过 navItems【:ref="el => {if(el) navItems[index] = el}"】遍历找到选中项
+    //优化后：直接定义选中项即可 【:ref="el => {if(t === selected) selectedItem = el}"】
+    // 直接在 selectedItem 中获取宽度 不需要再遍历
+    const selectedItem = ref<HTMLDivElement>(null)
     const indicator = ref<HTMLDivElement>(null)
     const container = ref<HTMLDivElement>(null)
     const x = () => {
-      const divs = navItems.value
-      const result = divs.filter(div => div.classList.contains('selected'))[0]
-      const {width} = result.getBoundingClientRect()
+      const {width} = selectedItem.value.getBoundingClientRect()
       indicator.value.style.width = width + 'px'
 
       const {left: left1} = container.value.getBoundingClientRect()// gugu-tabs-nav 的 left
-      const {left: left2} = result.getBoundingClientRect()//选中项的 left
+      const {left: left2} = selectedItem.value.getBoundingClientRect()//选中项的 left
       const left = left2 - left1
       indicator.value.style.left = left + 'px'
     }
-    // 挂载只会执行一次 所以点击切换导航 蓝色的线不会更新跟随
     onMounted(x)
-    // 使用 onUpdated 钩子函数达到导航切换下划线跟随滑动
     onUpdated(x)
     const defaults = context["slots"].default()
     defaults.forEach((tag) => {
@@ -61,7 +59,7 @@ export default {
     const select = (title: string) => {
       context.emit("update:selected", title)
     }
-    return {defaults, titles, currentSelected, select, navItems, indicator, container}
+    return {defaults, titles, currentSelected, select, selectedItem, indicator, container}
   }
 }
 </script>
