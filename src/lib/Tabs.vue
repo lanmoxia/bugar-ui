@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import Tab from './Tab.vue'
-import {computed, ref, watchEffect} from 'vue';
+import {ref, watchEffect} from 'vue';
 export default {
   props: {
     selected: {
@@ -34,8 +34,6 @@ export default {
       const {width} = selectedItem.value.getBoundingClientRect()
       if(!indicator || !indicator.value){return}
       indicator.value.style.width = width + 'px'
-      console.log(selectedItem);
-      console.log(selectedItem.value);
 
       const {left: left1} = container.value.getBoundingClientRect()
       const {left: left2} = selectedItem.value.getBoundingClientRect()
@@ -51,15 +49,10 @@ export default {
     const titles = defaults.map((tag) => {
       return tag["props"].title
     })
-    const currentSelected = computed(() => {
-      return defaults.filter((tag) => {
-        return tag["props"].title = props.selected
-      })[0]
-    })
     const select = (title: string) => {
       context.emit("update:selected", title)
     }
-    return {defaults, titles, currentSelected, select, selectedItem, indicator, container}
+    return {defaults, titles, select, selectedItem, indicator, container}
   }
 }
 </script>
