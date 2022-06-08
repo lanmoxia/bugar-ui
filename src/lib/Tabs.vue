@@ -1,12 +1,13 @@
 <template>
   <div class="gugu-tabs">
     <div class="gugu-tabs-nav">
+      <!--复杂的表达式 ref 前边需要加 :ref-->
       <div class="gugu-tabs-nav-item"
            :class="{selected: t === selected}"
            v-for="(t, index) in titles" :key="index"
            :ref="el => {if(el) navItems[index] = el}" @click="select(t)"
         >{{t}}</div>
-      <div class="gugu-tabs-nav-indicator"></div>
+      <div class="gugu-tabs-nav-indicator" ref="indicator"></div>
     </div>
     <div class="gugu-tabs-content div">
       <component class="gugu-tabs-content-item" :class="{selected: c.props.title === selected}"
@@ -25,10 +26,23 @@ export default {
     }
   },
   setup(props, context){
-    const navItems = ref([])
+    const navItems = ref<HTMLDivElement[]>([])
+    const indicator = ref<HTMLDivElement>(null)
     // 挂载后通过三个点操作符可以看到 navItems.value 是两个导航
     onMounted(() => {
-      console.log({...navItems.value});
+      const divs = navItems.value
+      // 筛选出被选中的 div
+      const result = divs.filter(div => div.classList.contains('selected'))[0]
+      // find 在古老的浏览器上不支持
+      // const result = divs.find(div => div.classList.contains('selected'))
+      //console.log(result.getBoundingClientRect());
+      // 获取到选中项的宽度
+      const {width} = result.getBoundingClientRect()
+      // 上边再定义一个 ref  然后把宽度传给蓝色的线条 ref="indicator"
+      // 获取
+      console.log(indicator);
+      console.log(indicator.value);
+      indicator.value.style.width = width + 'px'
     })
     const defaults = context["slots"].default()
     defaults.forEach((tag) => {
@@ -47,7 +61,7 @@ export default {
     const select = (title: string) => {
       context.emit("update:selected", title)
     }
-    return {defaults, titles, currentSelected, select, navItems}
+    return {defaults, titles, currentSelected, select, navItems, indicator}
   }
 }
 </script>
