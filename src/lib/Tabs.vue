@@ -3,21 +3,21 @@
     <div class="gugu-tabs-nav">
       <div class="gugu-tabs-nav-item"
            :class="{selected: t === selected}"
-           v-for="(t, index) in titles" :key="index" @click="select(t)">{{t}}</div>
+           v-for="(t, index) in titles" :key="index"
+           :ref="el => {if(el) navItems[index] = el}" @click="select(t)"
+        >{{t}}</div>
       <div class="gugu-tabs-nav-indicator"></div>
     </div>
     <div class="gugu-tabs-content div">
-      <component class="gugu-tabs-content-item"
-                 :class="{selected: c.props.title === selected}"
-                 v-for="c in defaults"
-                 :is="c"/>
+      <component class="gugu-tabs-content-item" :class="{selected: c.props.title === selected}"
+                 v-for="c in defaults" :is="c"/>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Tab from './Tab.vue'
-import {computed} from 'vue';
+import {computed, ref, onMounted} from 'vue';
 export default {
   props: {
     selected: {
@@ -25,6 +25,11 @@ export default {
     }
   },
   setup(props, context){
+    const navItems = ref([])
+    // 挂载后通过三个点操作符可以看到 navItems.value 是两个导航
+    onMounted(() => {
+      console.log({...navItems.value});
+    })
     const defaults = context["slots"].default()
     defaults.forEach((tag) => {
       if(tag.type !== Tab){
@@ -42,7 +47,7 @@ export default {
     const select = (title: string) => {
       context.emit("update:selected", title)
     }
-    return {defaults, titles, currentSelected, select}
+    return {defaults, titles, currentSelected, select, navItems}
   }
 }
 </script>
