@@ -9,15 +9,15 @@
       <div class="gugu-tabs-nav-indicator" ref="indicator"></div>
     </div>
     <div class="gugu-tabs-content div">
-      <component class="gugu-tabs-content-item" :class="{selected: c.props.title === selected}"
-                 v-for="c in defaults" :is="c"/>
+      <component class="gugu-tabs-content-item" :is="currentSelected"
+                 :key="currentSelected.props.title"/>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Tab from './Tab.vue'
-import {onMounted, ref, watchEffect} from 'vue';
+import {computed, onMounted, ref, watchEffect} from 'vue';
 export default {
   props: {
     selected: {
@@ -28,10 +28,6 @@ export default {
     const selectedItem = ref<HTMLDivElement>(null)
     const indicator = ref<HTMLDivElement>(null)
     const container = ref<HTMLDivElement>(null)
-    // watchEffect 在 onMounted 之前也会执行
-    // 这就导致了访问不到 Dom  所以 selectedItem.value 为 null
-    // 解决办法就是把 watchEffect 放在 onMounted 中
-    // 详情在 vue3 英文文档的 API Reference => Reactivity APIs => watchEffect
     onMounted(() => {
       watchEffect(() => {
         const {width} = selectedItem.value.getBoundingClientRect()
@@ -53,10 +49,15 @@ export default {
     const titles = defaults.map((tag) => {
       return tag["props"].title
     })
+    const currentSelected = computed(() => {
+      return defaults.filter((tag) => {
+        return tag["props"].title = props.selected
+      })[0]
+    })
     const select = (title: string) => {
       context.emit("update:selected", title)
     }
-    return {defaults, titles, select, selectedItem, indicator, container}
+    return {defaults, titles, select, selectedItem, indicator, container, currentSelected}
   }
 }
 </script>
