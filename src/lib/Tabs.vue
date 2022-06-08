@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import Tab from './Tab.vue'
-import {computed, ref, onMounted, onUpdated} from 'vue';
+import {computed, ref, watchEffect} from 'vue';
 export default {
   props: {
     selected: {
@@ -25,23 +25,23 @@ export default {
     }
   },
   setup(props, context){
-    //优化前：通过 navItems【:ref="el => {if(el) navItems[index] = el}"】遍历找到选中项
-    //优化后：直接定义选中项即可 【:ref="el => {if(t === selected) selectedItem = el}"】
-    // 直接在 selectedItem 中获取宽度 不需要再遍历
     const selectedItem = ref<HTMLDivElement>(null)
     const indicator = ref<HTMLDivElement>(null)
     const container = ref<HTMLDivElement>(null)
-    const x = () => {
+    // 使用 watchEffect 代替 onMounted, onUpdated
+    watchEffect(() => {
+      if(!selectedItem || !selectedItem.value){return}
       const {width} = selectedItem.value.getBoundingClientRect()
+      if(!indicator || !indicator.value){return}
       indicator.value.style.width = width + 'px'
+      console.log(selectedItem);
+      console.log(selectedItem.value);
 
-      const {left: left1} = container.value.getBoundingClientRect()// gugu-tabs-nav 的 left
-      const {left: left2} = selectedItem.value.getBoundingClientRect()//选中项的 left
+      const {left: left1} = container.value.getBoundingClientRect()
+      const {left: left2} = selectedItem.value.getBoundingClientRect()
       const left = left2 - left1
       indicator.value.style.left = left + 'px'
-    }
-    onMounted(x)
-    onUpdated(x)
+    })
     const defaults = context["slots"].default()
     defaults.forEach((tag) => {
       if(tag.type !== Tab){
