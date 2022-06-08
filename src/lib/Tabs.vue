@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import Tab from './Tab.vue'
-import {ref, watchEffect} from 'vue';
+import {onMounted, ref, watchEffect} from 'vue';
 export default {
   props: {
     selected: {
@@ -28,18 +28,22 @@ export default {
     const selectedItem = ref<HTMLDivElement>(null)
     const indicator = ref<HTMLDivElement>(null)
     const container = ref<HTMLDivElement>(null)
-    // 使用 watchEffect 代替 onMounted, onUpdated
-    watchEffect(() => {
-      if(!selectedItem || !selectedItem.value){return}
-      const {width} = selectedItem.value.getBoundingClientRect()
-      if(!indicator || !indicator.value){return}
-      indicator.value.style.width = width + 'px'
+    // watchEffect 在 onMounted 之前也会执行
+    // 这就导致了访问不到 Dom  所以 selectedItem.value 为 null
+    // 解决办法就是把 watchEffect 放在 onMounted 中
+    // 详情在 vue3 英文文档的 API Reference => Reactivity APIs => watchEffect
+    onMounted(() => {
+      watchEffect(() => {
+        const {width} = selectedItem.value.getBoundingClientRect()
+        indicator.value.style.width = width + 'px'
 
-      const {left: left1} = container.value.getBoundingClientRect()
-      const {left: left2} = selectedItem.value.getBoundingClientRect()
-      const left = left2 - left1
-      indicator.value.style.left = left + 'px'
+        const {left: left1} = container.value.getBoundingClientRect()
+        const {left: left2} = selectedItem.value.getBoundingClientRect()
+        const left = left2 - left1
+        indicator.value.style.left = left + 'px'
+      })
     })
+
     const defaults = context["slots"].default()
     defaults.forEach((tag) => {
       if(tag.type !== Tab){
