@@ -29,30 +29,21 @@ export default {
     const navItems = ref<HTMLDivElement[]>([])
     const indicator = ref<HTMLDivElement>(null)
     const container = ref<HTMLDivElement>(null)
+    const x = () => {
+      const divs = navItems.value
+      const result = divs.filter(div => div.classList.contains('selected'))[0]
+      const {width} = result.getBoundingClientRect()
+      indicator.value.style.width = width + 'px'
+
+      const {left: left1} = container.value.getBoundingClientRect()// gugu-tabs-nav 的 left
+      const {left: left2} = result.getBoundingClientRect()//选中项的 left
+      const left = left2 - left1
+      indicator.value.style.left = left + 'px'
+    }
     // 挂载只会执行一次 所以点击切换导航 蓝色的线不会更新跟随
-    onMounted(() => {
-      const divs = navItems.value
-      const result = divs.filter(div => div.classList.contains('selected'))[0]
-      const {width} = result.getBoundingClientRect()
-      indicator.value.style.width = width + 'px'
-
-      const {left: left1} = container.value.getBoundingClientRect()// gugu-tabs-nav 的 left
-      const {left: left2} = result.getBoundingClientRect()//选中项的 left
-      const left = left2 - left1
-      indicator.value.style.left = left + 'px'
-    })
-    // 使用 onUpdated 更新钩子函数达到导航切换更新的问题
-    onUpdated(() => {
-      const divs = navItems.value
-      const result = divs.filter(div => div.classList.contains('selected'))[0]
-      const {width} = result.getBoundingClientRect()
-      indicator.value.style.width = width + 'px'
-
-      const {left: left1} = container.value.getBoundingClientRect()// gugu-tabs-nav 的 left
-      const {left: left2} = result.getBoundingClientRect()//选中项的 left
-      const left = left2 - left1
-      indicator.value.style.left = left + 'px'
-    })
+    onMounted(x)
+    // 使用 onUpdated 钩子函数达到导航切换下划线跟随滑动
+    onUpdated(x)
     const defaults = context["slots"].default()
     defaults.forEach((tag) => {
       if(tag.type !== Tab){
@@ -103,6 +94,7 @@ $border-color: #d9d9d9;
       left: 0;
       bottom: -1px;
       width: 100px;
+      transition: all 250ms ;
     }
   }
   &-content {
