@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="topNavAndBanner">
     <TopNav/>
     <div class="banner">
       <h1>咕 咕 UI</h1>
@@ -21,17 +21,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.topNavAndBanner{
+  background-image: linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%);
+}
 .banner {
   padding: 100px 0;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: lightgreen;
-
   > .actions {
     padding: 8px 0;
-
     a {
       margin: 0 8px;
       background: #fff;
@@ -44,4 +44,5 @@ export default {
     }
   }
 }
+
 </style>
