@@ -1,9 +1,12 @@
 <template>
   <div class="topNav">
-    <div class="logo">LOGO</div>
+    <div class="logo">
+      <img src="../assets/images/logo1.png" alt="logo">
+    </div>
     <ul class="menu">
-      <li>菜单1</li>
-      <li>菜单2</li>
+      <li>
+        <router-link to="/doc">文档</router-link>
+      </li>
     </ul>
     <span class="toggleAside" @click="toggleMenu"></span>
   </div>
@@ -24,11 +27,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$color: rgb(1 157 147);
+$color: rgb(28 65 99);
 .topNav {
   color: $color;
+  background-image: linear-gradient(to top, #fff 0%, #f3f8fd 100%);
   display: flex;
-  padding: 16px;
+  padding: 2px 15px;
   position: fixed;
   top: 0;
   left: 0;
@@ -36,20 +40,35 @@ $color: rgb(1 157 147);
   z-index: 10;
   justify-content: center;
   align-items: center;
-
+  &::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #243d54;
+  }
   > .logo {
-    max-width: 6em;
     margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #243d54;
+    border-radius: 50%;
+    border: 2px solid white;
+    -moz-box-shadow:0px 8px 0px #243d54; -webkit-box-shadow:0px 8px 0px #243d54; box-shadow:0px 8px 0px #243d54;
+    > img{
+      width: 40px;
+      height: 40px;
+    }
   }
 
   > .menu {
     display: flex;
     white-space: nowrap;
     flex-wrap: nowrap;
-
-    > li {
-      margin: 0 1em;
-    }
+    color: #243d54;
   }
 
   > .toggleAside {

@@ -28,5 +28,5 @@ export const router = createRouter({
 // 但是 App 访问不到 router
 // 所以新建文件把 router 的相关放到这里
 router.afterEach(() => {
-  console.log('路由切换了');
+  // console.log('路由切换了');
 })
