@@ -19,12 +19,10 @@ export default {
     }
   },
   setup(props){
+    // 异步 import 开始content是null 在3g网速下会造成白屏(菊花图解决)
     const content = ref(null)
     import(props.path).then(result => {
-      // 这里通过定时器来重现下 content 从无到有
-      setTimeout(()=>{
         content.value = result.default
-      },5000)
     })
     return {content}
   }
