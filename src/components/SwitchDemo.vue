@@ -5,14 +5,14 @@
       <h2>常规用法</h2>
       <div class="demo-component">
         <component :is="Switch1Demo"/>
-        <!--<Switch1Demo />-->
       </div>
       <div class="demo-actions">
         <Button>查看代码</Button>
       </div>
       <div class="demo-code">
-<!--        <pre>{{Switch1Demo['__sourceCode']}}</pre> 两种方法-->
-        <pre v-text="Switch1Demo['__sourceCode']"></pre>
+        <pre v-html="Prism.highlight(Switch1Demo['__sourceCode'],
+        Prism.languages['html'],
+        'html')"></pre>
       </div>
     </div>
     <div class="demo">
@@ -31,25 +31,19 @@
 </template>
 
 <script lang="ts">
-import Switch from '../lib/Switch.vue';
 import Button from '../lib/Button.vue';
 import {ref} from 'vue';
 import Switch1Demo from '../components/Switch1.demo.vue'
 import Switch2Demo from '../components/Switch2.demo.vue'
+import Prism from 'prismjs'
+import 'prismjs/themes/prism.css'
 
-// Switch1Demo/Switch2Demo 在 template 标签外部 添加 demo 标签随便加些内容
-// 使用 vue-loader 的 Custom Blocks 功能 详情见 vite.config.js 按提示安装相关依赖
-// 最后在 pre 标签内通过 v-text 或 {{}} 展示源码
-// pre 标签使用 {{}} 展示源码 不能回车 中间不能有空行 否装 trim() 无效
-// 通过 logo 可以查看控制台源码
-console.log(Switch1Demo)
-console.log(Switch1Demo['__sourceCode']);
 export default {
   components: {Button},
   setup(){
     const bool = ref(false)
     return {
-      bool, Switch1Demo, Switch2Demo
+      bool, Switch1Demo, Switch2Demo, Prism
     }
   }
 }
