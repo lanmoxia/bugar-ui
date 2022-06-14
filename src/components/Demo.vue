@@ -1,6 +1,6 @@
 <template>
   <div class="demo">
-    <h2>常规用法</h2>
+    <h2>{{component['__sourceCodeTitle']}}</h2>
     <div class="demo-component">
       <component :is="component"/>
     </div>
@@ -16,16 +16,13 @@
 </template>
 
 <script lang="ts">
-import Button from '../lib/Button.vue';
-import {ref} from 'vue';
 import Prism from 'prismjs'
 export default {
-  components: {Button},
   props: {
     component: Object
   },
   setup(){
-    const bool = ref(false)
+
     return {Prism}
   }
 }
