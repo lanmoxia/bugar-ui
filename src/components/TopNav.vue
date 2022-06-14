@@ -8,7 +8,9 @@
         <router-link to="/doc">文档</router-link>
       </li>
     </ul>
-    <span v-if="toggleMenuButtonVisible" class="toggleAside" @click="toggleMenu"></span>
+    <div v-if="toggleMenuButtonVisible" class="toggleAside" @click="toggleMenu">
+      <img src="../assets/images/menu.png" alt="">
+    </div>
   </div>
 </template>
 
@@ -78,15 +80,16 @@ $color: rgb(28 65 99);
   }
 
   > .toggleAside {
-    width: 24px;
-    height: 24px;
-    background: red;
-    border-radius: 50%;
     position: absolute;
     left: 16px;
     top: 50%;
     transform: translateY(-50%);
     display: none;
+    text-align: center;
+    > img{
+      width: 20px;
+      height: 20px;
+    }
   }
 
   @media (max-width: 500px) {
