@@ -10,21 +10,17 @@ import {h} from 'vue';
 import Markdown from './components/Marked.vue'
 
 const history = createWebHashHistory()
+// 这种异步 import 加载会相对慢一点 代码简洁
+const md = filename => h(Markdown, {path: `../markdown/${filename}.md`, key: filename})
 export const router = createRouter({
   history: history,
   routes: [
     {path: '/', component: Home},
     {path: '/doc', component: Doc, children:[
         {path: '', component: DocDemo},
-        {path: 'intro', component: h(Markdown,{
-          path: '../markdown/intro.md', key: '1'
-        })},
-        {path: 'get-started', component: h(Markdown, {
-          path: '../markdown/getStarted.md', key: '2'
-          })},
-        {path: 'install', component: h(Markdown,{
-          path: '../markdown/install.md', key: '3'
-          })},
+        {path: 'intro', component: md('intro')},
+        {path: 'get-started', component: md('getStarted')},
+        {path: 'install', component: md('install')},
         {path: 'switch', component: SwitchDemo},
         {path: 'button', component: ButtonDemo},
         {path: 'dialog', component: DialogDemo},
