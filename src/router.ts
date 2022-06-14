@@ -5,11 +5,9 @@ import SwitchDemo from './components/SwitchDemo.vue'
 import ButtonDemo from './components/ButtonDemo.vue'
 import DialogDemo from './components/DialogDemo.vue'
 import TabsDemo from './components/TabsDemo.vue'
-// @ts-ignore
-import Intro from './views/Intro.vue'
-import GetStarted from './views/GetStarted.vue'
-import Install from './views/Install.vue'
 import {createRouter, createWebHashHistory} from 'vue-router';
+import {h} from 'vue';
+import Markdown from './components/Marked.vue'
 
 const history = createWebHashHistory()
 export const router = createRouter({
@@ -18,9 +16,15 @@ export const router = createRouter({
     {path: '/', component: Home},
     {path: '/doc', component: Doc, children:[
         {path: '', component: DocDemo},
-        {path: 'intro', component: Intro},
-        {path: 'get-started', component: GetStarted},
-        {path: 'install', component: Install},
+        {path: 'intro', component: h(Markdown,{
+          path: '../markdown/intro.md', key: '1'
+        })},
+        {path: 'get-started', component: h(Markdown, {
+          path: '../markdown/getStarted.md', key: '2'
+          })},
+        {path: 'install', component: h(Markdown,{
+          path: '../markdown/install.md', key: '3'
+          })},
         {path: 'switch', component: SwitchDemo},
         {path: 'button', component: ButtonDemo},
         {path: 'dialog', component: DialogDemo},
@@ -28,12 +32,7 @@ export const router = createRouter({
       ]}
   ]
 })
-// 通过 router.afterEach 能知道路由有没有切换
-// 这样切换了可以改变 menuVisible 的值
-// 因为 menuVisible 变量在 App 中 无法访问到
-// 把 router.afterEach 放到 App 中 这样就能访问到 menuVisible
-// 但是 App 访问不到 router
-// 所以新建文件把 router 的相关放到这里
+
 router.afterEach(() => {
   // console.log('路由切换了');
 })
