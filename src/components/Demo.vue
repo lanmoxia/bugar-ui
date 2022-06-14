@@ -8,22 +8,27 @@
       <Button>查看代码</Button>
     </div>
     <div class="demo-code">
-        <pre  class="language-css" v-html="Prism.highlight(component['__sourceCode'],
-        Prism.languages['html'],
-        'html')"></pre>
+        <pre class="language-css" v-html="html"></pre>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Prism from 'prismjs'
+import {computed} from 'vue';
+import Button from '../lib/Button.vue';
 export default {
+  components: {Button},
   props: {
     component: Object
   },
-  setup(){
-
-    return {Prism}
+  setup(props){
+    const html = computed(() => {
+      return Prism.highlight(props.component['__sourceCode'],
+          Prism.languages['html'],
+          'html')
+    })
+    return {Prism, html}
   }
 }
 </script>
