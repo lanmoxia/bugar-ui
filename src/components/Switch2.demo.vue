@@ -1,3 +1,4 @@
+<demo>yyy</demo>
 <template>
   <Switch v-model:value="bool" disabled/>
 </template>

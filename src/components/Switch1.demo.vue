@@ -1,3 +1,4 @@
+<demo>xxx</demo>
 <template>
   <Switch v-model:value="bool"/>
 </template>
