@@ -15,7 +15,7 @@
             <router-link to="/doc/get-started">开始</router-link>
           </li>
         </ol>
-        <h2>组件列表</h2>
+        <h2 class="titleText">组件列表</h2>
         <ol>
           <li>
             <router-link to="/doc/switch">Switch 组件</router-link>
@@ -86,19 +86,19 @@ export default {
 }
 
 aside {
-  background: #e1eaf4;
-  width: 150px;
+  color: #243d54;
   position: fixed;
   top: 0;
   left: 0;
   padding: 80px 0;
   height: 100%;
+  background-image: linear-gradient(to top, #dfe9f3 0%, #f7fbff 100%);
   z-index: 1;
   > h2 {
     margin-bottom: 4px;
     padding: 0 16px;
   }
-
+  > .titleText{margin-top: 15px}
   > ol {
     > li {
       > a{
@@ -108,6 +108,8 @@ aside {
       }
       .router-link-active{
         background: white;
+        border-right: 3px solid #a7b6c6;
+        color: #11273a;
       }
     }
   }

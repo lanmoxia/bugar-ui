@@ -1,8 +1,8 @@
 <template>
     <!--因为 props 写了 disabled 所以不会继承 这里还要绑定下 disabled-->
-    <button class="gugu-button" :class="classes" :disabled="disabled">
+    <button class="bugu-button" :class="classes" :disabled="disabled">
       <span v-if="loading"
-          class="gugu-loadingIndicator"></span>
+          class="bugu-loadingIndicator"></span>
       <slot/>
     </button>
 </template>
@@ -38,11 +38,11 @@ export default {
     const {theme, size, level, disabled, loading} = props
     const classes = computed(() => {
       return {
-        [`gugu-theme-${theme}`]: theme,
-        [`gugu-size-${size}`]: size,
-        [`gugu-level-${level}`]: level,
-        [`gugu-disabled-${disabled}`]: disabled,
-        [`gugu-loading-${loading}`]: loading
+        [`bugu-theme-${theme}`]: theme,
+        [`bugu-size-${size}`]: size,
+        [`bugu-level-${level}`]: level,
+        [`bugu-disabled-${disabled}`]: disabled,
+        [`bugu-loading-${loading}`]: loading
       }
     })
     return {classes}
@@ -58,7 +58,7 @@ $blue: #40a9ff;
 $radius: 4px;
 $red: red;
 $grey: gray;
-.gugu-button {
+.bugu-button {
   box-sizing: border-box;
   height: $h;
   padding: 0 12px;
@@ -73,7 +73,7 @@ $grey: gray;
   border-radius: $radius;
   box-shadow: 0 1px 0 fade-out(black, 0.95);
   transition: background 250ms;
-  //&+& 是 gugu-button+gugu-button 的意思
+  //&+& 是 bugu-button+bugu-button 的意思
   & + & {
     margin-left: 8px;
   }
@@ -88,7 +88,7 @@ $grey: gray;
   &::-moz-focus-inner {
     border: 0;
   }
-  &.gugu-theme-link{
+  &.bugu-theme-link{
     border-color: transparent;
     box-shadow: none;
     color: $blue;
@@ -96,7 +96,7 @@ $grey: gray;
       color: lighten($blue, 10%);
     }
   }
-  &.gugu-theme-text{
+  &.bugu-theme-text{
     border-color: transparent;
     box-shadow: none;
     color: inherit;
@@ -104,18 +104,18 @@ $grey: gray;
       background: darken(white, 5%);;
     }
   }
-  &.gugu-size-big {
+  &.bugu-size-big {
     font-size: 24px;
     height: 48px;
     padding: 0 16px;
   }
-  &.gugu-size-small {
+  &.bugu-size-small {
     font-size: 12px;
     height: 20px;
     padding: 0 4px;
   }
-  &.gugu-theme-button {
-    &.gugu-level-main {
+  &.bugu-theme-button {
+    &.bugu-level-main {
       background: $blue;
       color: white;
       border-color: $blue;
@@ -125,7 +125,7 @@ $grey: gray;
         border-color: darken($blue, 10%);
       }
     }
-    &.gugu-level-danger {
+    &.bugu-level-danger {
       background: $red;
       border-color: $red;
       color: white;
@@ -136,8 +136,8 @@ $grey: gray;
       }
     }
   }
-  &.gugu-theme-link {
-    &.gugu-level-danger {
+  &.bugu-theme-link {
+    &.bugu-level-danger {
       color: $red;
       &:hover,
       &:focus {
@@ -145,15 +145,15 @@ $grey: gray;
       }
     }
   }
-  &.gugu-theme-text {
-    &.gugu-level-main {
+  &.bugu-theme-text {
+    &.bugu-level-main {
       color: $blue;
       &:hover,
       &:focus {
         color: darken($blue, 10%);
       }
     }
-    &.gugu-level-danger {
+    &.bugu-level-danger {
       color: $red;
       &:hover,
       &:focus {
@@ -161,7 +161,7 @@ $grey: gray;
       }
     }
   }
-  &.gugu-theme-button {
+  &.bugu-theme-button {
     &[disabled] {
       cursor: not-allowed;
       color: $grey;
@@ -170,13 +170,13 @@ $grey: gray;
       }
     }
   }
-  &.gugu-theme-link, &.gugu-theme-text {
+  &.bugu-theme-link, &.bugu-theme-text {
     &[disabled] {
       cursor: not-allowed;
       color: $grey;
     }
   }
-  >.gugu-loadingIndicator{
+  >.bugu-loadingIndicator{
     width: 14px;
     height: 14px;
     display: inline-block;
@@ -185,10 +185,10 @@ $grey: gray;
     border-color: $blue $blue $blue transparent;
     border-style: solid;
     border-width: 2px;
-    animation: gugu-spin 1s infinite linear
+    animation: bugu-spin 1s infinite linear
   }
 }
-@keyframes gugu-spin {
+@keyframes bugu-spin {
   0%{transform: rotate(0deg)}
   100%{transform: rotate(360deg)}
 }

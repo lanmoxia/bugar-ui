@@ -1,6 +1,6 @@
-// 对于含有 gugu- 开头的和第二个第n个含有 空格gugu- 的类名起作用
-// *=: <div class="xxx gugu-button"></div>
-[class^="gugu-"], [class*= " gugu-"]{
+// 对于含有 bugu- 开头的和第二个第n个含有 空格bugu- 的类名起作用
+// *=: <div class="xxx bugu-button"></div>
+[class^="bugu-"], [class*= " bugu-"]{
   margin: 0;
   padding: 0;
   box-sizing: border-box;

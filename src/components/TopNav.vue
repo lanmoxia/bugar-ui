@@ -1,8 +1,8 @@
 <template>
   <div class="topNav">
-    <div class="logo">
+    <router-link to="/" class="logo">
       <img src="../assets/images/logo1.png" alt="logo">
-    </div>
+    </router-link>
     <ul class="menu">
       <li>
         <router-link to="/doc">文档</router-link>
@@ -38,7 +38,7 @@ export default {
 $color: rgb(28 65 99);
 .topNav {
   color: $color;
-  background-image: linear-gradient(to top, #fff 0%, #f3f8fd 100%);
+  background-image: linear-gradient(to top, #f3f8fd 0%, #fff 100%);
   display: flex;
   padding: 2px 15px;
   position: fixed;
@@ -65,7 +65,7 @@ $color: rgb(28 65 99);
     background: #243d54;
     border-radius: 50%;
     border: 2px solid white;
-    -moz-box-shadow:0px 8px 0px #243d54; -webkit-box-shadow:0px 8px 0px #243d54; box-shadow:0px 8px 0px #243d54;
+    -moz-box-shadow:0 8px 0 #243d54; -webkit-box-shadow:0 8px 0 #243d54; box-shadow:0 8px 0 #243d54;
     > img{
       width: 40px;
       height: 40px;
