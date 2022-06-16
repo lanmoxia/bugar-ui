@@ -1,7 +1,9 @@
 <template>
   <div class="topNav">
     <router-link to="/" class="logo">
-      <img src="../assets/images/logo1.png" alt="logo">
+      <svg class="icon">
+        <use xlink:href="#icon-logo"></use>
+      </svg>
     </router-link>
     <ul class="menu">
       <li>
@@ -9,7 +11,9 @@
       </li>
     </ul>
     <div v-if="toggleMenuButtonVisible" class="toggleAside" @click="toggleMenu">
-      <img src="../assets/images/menu.png" alt="">
+      <svg class="icon">
+        <use xlink:href="#icon-menu"></use>
+      </svg>
     </div>
   </div>
 </template>
@@ -66,7 +70,7 @@ $color: rgb(28 65 99);
     border-radius: 50%;
     border: 2px solid white;
     -moz-box-shadow:0 8px 0 #243d54; -webkit-box-shadow:0 8px 0 #243d54; box-shadow:0 8px 0 #243d54;
-    > img{
+    > svg{
       width: 40px;
       height: 40px;
     }
@@ -86,9 +90,9 @@ $color: rgb(28 65 99);
     transform: translateY(-50%);
     display: none;
     text-align: center;
-    > img{
-      width: 20px;
-      height: 20px;
+    > svg{
+      width: 25px;
+      height: 25px;
     }
   }
 

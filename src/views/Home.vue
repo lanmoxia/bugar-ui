@@ -15,17 +15,23 @@
       <div class="features">
         <ul>
           <li>
-            <img src="../assets/images/vue.png" alt="vue">
+            <svg class="icon">
+              <use xlink:href="#icon-vue"></use>
+            </svg>
             <h3>基于 Vue 3</h3>
             <p>使用了 Vue3 Composition API</p>
           </li>
           <li>
-            <img src="../assets/images/ts.png" alt="ts">
+            <svg class="icon">
+              <use xlink:href="#icon-ts"></use>
+            </svg>
             <h3>基于 TypeScript </h3>
             <p>源代码采用 TypeScript 书写（非严格模式）</p>
           </li>
           <li>
-            <img src="../assets/images/easy.png" alt="easy">
+            <svg class="icon">
+              <use xlink:href="#icon-easy"></use>
+            </svg>
             <h3>代码易读</h3>
             <p>每个组件的源代码都极其简洁</p>
           </li>
@@ -61,7 +67,7 @@ $color:rgb(100 131 159);
         justify-content: center;
         align-items: center;
         margin: 30px auto;
-        >img {
+        >svg {
           width: 64px;
           height: 64px;
         }
