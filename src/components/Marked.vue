@@ -13,18 +13,10 @@ import md from '../markdown/intro.md'
 import {ref} from 'vue';
 export default {
   props:{
-    path: {
+    content: {
       type: String,
       required: true
     }
-  },
-  setup(props){
-    // 异步 import 开始content是null 在3g网速下会造成白屏(菊花图解决)
-    const content = ref(null)
-    import(props.path).then(result => {
-        content.value = result.default
-    })
-    return {content}
   }
 }
 </script>
