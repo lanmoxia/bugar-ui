@@ -12,8 +12,8 @@ export default {
     globals: {
       vue: 'Vue'
     },
-    name: 'Bugu',
-    file: 'dist/lib/bugu.js',
+    name: 'Bugar',
+    file: 'dist/lib/bugar.js',
     format: 'umd',
     plugins: [terser()]
   },
