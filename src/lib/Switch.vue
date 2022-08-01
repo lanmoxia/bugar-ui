@@ -1,5 +1,5 @@
 <template>
-  <button class="bugu-switch" @click="toggle" :class="{'bugu-checked': value}">
+  <button class="bugar-switch" @click="toggle" :class="{'bugar-checked': value}">
     <span></span>
   </button>
 </template>
@@ -21,14 +21,14 @@ export default {
 <style lang="scss">
   $h: 22px;
   $h2: $h - 4px;
-  .bugu-switch { // 最小知识原则 这里是 UI 库 不能使用 button
+  .bugar-switch { // 最小知识原则 这里是 UI 库 不能使用 button
     height: $h;width: $h*2;border: none;background: #bfbfbf;
     border-radius: $h/2;position: relative;
     > span {
       position: absolute;top: 2px;left: 2px;height: $h2;width: $h2;
       background: white;border-radius: $h2 / 2;transition: all 250ms;
     }
-    &.bugu-checked {
+    &.bugar-checked {
       background: #1890ff;
       > span {left: calc(100% - #{$h2} - 2px);}
     }
@@ -36,10 +36,8 @@ export default {
     &:active{
       > span {width: $h2 + 4px;}
     }
-    &.bugu-checked:active{
+    &.bugar-checked:active{
       > span {width: $h2 + 4px; margin-left: -4px;}
     }
   }
-
-
 </style>

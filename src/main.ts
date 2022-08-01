@@ -1,5 +1,5 @@
 // 必须放到前边
-import './lib/bugu.scss'
+import './lib/bugar.scss'
 import './index.scss'
 import { createApp } from 'vue'
 import App from './App.vue'

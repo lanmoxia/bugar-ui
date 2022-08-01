@@ -1,15 +1,15 @@
 <template>
-  <div class="bugu-tabs">
-    <div class="bugu-tabs-nav" ref="container">
-      <div class="bugu-tabs-nav-item"
+  <div class="bugar-tabs">
+    <div class="bugar-tabs-nav" ref="container">
+      <div class="bugar-tabs-nav-item"
            :class="{selected: t === selected}"
            v-for="(t, index) in titles" :key="index"
            :ref="el => {if(t === selected) selectedItem = el}" @click="select(t)"
         >{{t}}</div>
-      <div class="bugu-tabs-nav-indicator" ref="indicator"></div>
+      <div class="bugar-tabs-nav-indicator" ref="indicator"/>
     </div>
-    <div class="bugu-tabs-content div">
-      <component class="bugu-tabs-content-item" :class="{selected: c.props.title === selected}"
+    <div class="bugar-tabs-content div">
+      <component class="bugar-tabs-content-item" :class="{selected: c.props.title === selected}"
                  v-for="c in defaults" :is="c"/>
     </div>
   </div>
@@ -65,7 +65,7 @@ export default {
 $blue: #40a9ff;
 $color: #333;
 $border-color: #d9d9d9;
-.bugu-tabs {
+.bugar-tabs {
   &-nav {
     display: flex;
     color: $color;
