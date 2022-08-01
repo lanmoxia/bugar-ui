@@ -6,7 +6,7 @@
            v-for="(t, index) in titles" :key="index"
            :ref="el => {if(t === selected) selectedItem = el}" @click="select(t)"
         >{{t}}</div>
-      <div class="bugu-tabs-nav-indicator" ref="indicator"></div>
+      <div class="bugu-tabs-nav-indicator" ref="indicator"/>
     </div>
     <div class="bugu-tabs-content div">
       <component class="bugu-tabs-content-item" :class="{selected: c.props.title === selected}"

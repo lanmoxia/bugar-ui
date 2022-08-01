@@ -1,9 +1,8 @@
 <template>
     <!--因为 props 写了 disabled 所以不会继承 这里还要绑定下 disabled-->
     <button class="bugu-button" :class="classes" :disabled="disabled">
-      <span v-if="loading"
-          class="bugu-loadingIndicator"></span>
-      <slot/>
+      <span v-if="loading" class="bugu-loadingIndicator"></span>
+      <slot />
     </button>
 </template>
 
