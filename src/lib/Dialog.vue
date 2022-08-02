@@ -48,12 +48,12 @@ export default {
       if(props.closeOnClickOverlay){close()}
     }
     const ok = () => {
-      if(props.ok?.() !== false){ // 简写
+      if(props.ok && props.ok() !== false){ // 简写
         close()
       }
     }
     const cancel = () => {
-      props.cancel?.()
+      props.cancel && props.cancel()
       close()
     }
     return {close, onClickOverlay, ok, cancel}

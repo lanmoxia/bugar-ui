@@ -43,7 +43,7 @@ export default {
 }
 </script>
 <style lang="scss">
-@import 'prismjs/themes/prism-okaidia.css'
+@import 'prismjs/themes/prism-okaidia.css';
 </style>
 <style lang="scss" scoped>
 $border-color: #d9d9d9;
