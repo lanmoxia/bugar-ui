@@ -4,7 +4,7 @@
 
 然后在您的代码中写入下面的代码，就可以使用我提供的组件了。
 ```
-import {Button, Tabs, Switch, Dialog} from "bugar-ui"
+import {Button, Tabs, Tab, Switch, Dialog, openDialog} from "bugar-ui"
 ```
 
 ## Vue 单文件组件
@@ -18,7 +18,7 @@ import {Button, Tabs, Switch, Dialog} from "bugar-ui"
 </template>
 
 <script>
-  import {Button, Tabs, Switch, Dialog} from "bugar-ui"
+  import {Button, Tabs, Tab, Switch, Dialog, openDialog} from "bugar-ui"
   export default {
     components: {Button}
   }
