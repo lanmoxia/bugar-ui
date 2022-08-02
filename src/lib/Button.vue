@@ -2,7 +2,7 @@
     <!--因为 props 写了 disabled 所以不会继承 这里还要绑定下 disabled-->
     <button class="bugar-button" :class="classes" :disabled="disabled">
       <span v-if="loading" class="bugar-loadingIndicator"></span>
-      <slot />
+      <slot></slot>
     </button>
 </template>
 
