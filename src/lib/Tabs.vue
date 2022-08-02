@@ -15,49 +15,58 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup="props, context">
 import Tab from './Tab.vue'
-import {onMounted, ref, watchEffect} from 'vue';
+import {
+  computed,
+  ref,
+  watchEffect,
+  onMounted, SetupContext, Component
+} from 'vue'
+declare const props: {selected: string}
+declare const context: SetupContext
 export default {
   props: {
     selected: {
       type: String
     }
   },
-  setup(props, context){
-    const selectedItem = ref<HTMLDivElement>(null)
-    const indicator = ref<HTMLDivElement>(null)
-    const container = ref<HTMLDivElement>(null)
-    // watchEffect 在 onMounted 之前也会执行
-    // 这就导致了访问不到 Dom  所以 selectedItem.value 为 null
-    // 解决办法就是把 watchEffect 放在 onMounted 中
-    // 详情在 vue3 英文文档的 API Reference => Reactivity APIs => watchEffect
-    onMounted(() => {
-      watchEffect(() => {
-        const {width} = selectedItem.value.getBoundingClientRect()
-        indicator.value.style.width = width + 'px'
-
-        const {left: left1} = container.value.getBoundingClientRect()
-        const {left: left2} = selectedItem.value.getBoundingClientRect()
-        const left = left2 - left1
-        indicator.value.style.left = left + 'px'
-      })
-    })
-
-    const defaults = context["slots"].default()
-    defaults.forEach((tag) => {
-      if(tag.type !== Tab){
-        throw new Error("Tabs 的子标签必须是 Tab")
-      }
-    })
-    const titles = defaults.map((tag) => {
-      return tag["props"].title
-    })
-    const select = (title: string) => {
-      context.emit("update:selected", title)
-    }
-    return {defaults, titles, select, selectedItem, indicator, container}
+}
+export const selectedItem = ref < HTMLDivElement > (null)
+export const indicator = ref < HTMLDivElement > (null)
+export const container = ref < HTMLDivElement > (null)
+onMounted(() => {
+  watchEffect(() => {
+    const {
+      width
+    } = selectedItem.value.getBoundingClientRect()
+    indicator.value.style.width = width + 'px'
+    const {
+      left: left1
+    } = container.value.getBoundingClientRect()
+    const {
+      left: left2
+    } = selectedItem.value.getBoundingClientRect()
+    const left = left2 - left1
+    indicator.value.style.left = left + 'px'
+  }, {
+    flush: 'post'
+  })
+})
+export const defaults = context.slots.default()
+defaults.forEach((tag) => {
+  if ((tag.type as Component).name !== Tab.name) {
+    throw new Error('Tabs 子标签必须是 Tab')
   }
+})
+export const current = computed(() => {
+  return defaults.find(tag => tag.props.title === props.selected)
+})
+export const titles = defaults.map((tag) => {
+  return tag.props.title
+})
+export const select = (title: string) => {
+  context.emit('update:selected', title)
 }
 </script>
 

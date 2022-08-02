@@ -2,13 +2,10 @@
   <router-view/>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 
 import {provide, ref} from 'vue';
 import {router} from './router';
-export default {
-  name: 'App',
-  setup(){
     // 获取当前页面宽度
     const width = document.documentElement.clientWidth
     const menuVisible = ref(width > 500)
@@ -19,6 +16,4 @@ export default {
         menuVisible.value = false
       }
     })
-  }
-}
 </script>

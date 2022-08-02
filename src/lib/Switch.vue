@@ -4,17 +4,17 @@
   </button>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup="props, context">
+import { ref, SetupContext } from "vue";
+declare const props: {value: boolean}
+declare const context: SetupContext
 export default {
   props: {
     value: Boolean
   },
-  setup(props, context){
-    const toggle = () => {
-      context.emit('update:value', !props.value)
-    }
-    return{toggle: toggle}
-  }
+}
+  export const toggle = () => {
+    context.emit("update:value", !props.value);
 }
 </script>
 

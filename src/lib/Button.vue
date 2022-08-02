@@ -6,47 +6,48 @@
     </button>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup="props">
 import {computed} from 'vue';
 
+declare const props: {
+  theme: 'button' | 'text' | 'link';
+  size: 'normal' | 'big' | 'small';
+  level: 'normal' | 'main' | 'danger';
+  disabled: boolean;
+  loading: boolean;
+}
 export default {
-  // 这样设置默认值 可以解决第一个 button 是 theme-undefined 的问题
   props: {
     theme: {
       type: String,
-      default: 'button'
+      default: "button",
     },
     size: {
       type: String,
-      default: 'normal'
+      default: "normal",
     },
     level: {
       type: String,
-      default: 'normal'
+      default: "normal",
     },
     disabled: {
       type: Boolean,
-      default: false
+      default: false,
     },
     loading: {
       type: Boolean,
       default: false
     }
   },
-  setup(props){
-    const {theme, size, level, disabled, loading} = props
-    const classes = computed(() => {
-      return {
-        [`bugar-theme-${theme}`]: theme,
-        [`bugar-size-${size}`]: size,
-        [`bugar-level-${level}`]: level,
-        [`bugar-disabled-${disabled}`]: disabled,
-        [`bugar-loading-${loading}`]: loading
-      }
-    })
-    return {classes}
-  }
-}
+};
+const { theme, size, level } = props;
+export const classes = computed(() => {
+  return {
+    [`gulu-theme-${theme}`]: theme,
+    [`gulu-size-${size}`]: size,
+    [`gulu-level-${level}`]: level,
+  };
+});
 </script>
 
 <style lang="scss">
