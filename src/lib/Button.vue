@@ -1,14 +1,11 @@
 <template>
-    <!--因为 props 写了 disabled 所以不会继承 这里还要绑定下 disabled-->
-    <button class="bugar-button" :class="classes" :disabled="disabled">
-      <span v-if="loading" class="bugar-loadingIndicator"></span>
-      <slot/>
-    </button>
+  <button class="bugar-button" :class="classes" :disabled="disabled">
+    <span v-if="loading" class="bugar-loadingIndicator"></span>
+    <slot />
+  </button>
 </template>
-
 <script lang="ts" setup="props">
-import {computed} from 'vue';
-
+import { computed } from "vue";
 declare const props: {
   theme?: 'button' | 'text' | 'link';
   size?: 'normal' | 'big' | 'small';
@@ -43,13 +40,12 @@ export default {
 const { theme, size, level } = props;
 export const classes = computed(() => {
   return {
-    [`gulu-theme-${theme}`]: theme,
-    [`gulu-size-${size}`]: size,
-    [`gulu-level-${level}`]: level,
+    [`bugar-theme-${theme}`]: theme,
+    [`bugar-size-${size}`]: size,
+    [`bugar-level-${level}`]: level,
   };
 });
 </script>
-
 <style lang="scss">
 $h: 32px;
 $border-color: #d9d9d9;
@@ -57,7 +53,7 @@ $color: #333;
 $blue: #40a9ff;
 $radius: 4px;
 $red: red;
-$grey: gray;
+$grey: grey;
 .bugar-button {
   box-sizing: border-box;
   height: $h;
@@ -73,7 +69,6 @@ $grey: gray;
   border-radius: $radius;
   box-shadow: 0 1px 0 fade-out(black, 0.95);
   transition: background 250ms;
-  //&+& 是 bugar-button+bugar-button 的意思
   & + & {
     margin-left: 8px;
   }
@@ -88,20 +83,22 @@ $grey: gray;
   &::-moz-focus-inner {
     border: 0;
   }
-  &.bugar-theme-link{
+  &.bugar-theme-link {
     border-color: transparent;
     box-shadow: none;
     color: $blue;
-    &:hover,&:focus{
+    &:hover,
+    &:focus {
       color: lighten($blue, 10%);
     }
   }
-  &.bugar-theme-text{
+  &.bugar-theme-text {
     border-color: transparent;
     box-shadow: none;
     color: inherit;
-    &:hover,&:focus{
-      background: darken(white, 5%);;
+    &:hover,
+    &:focus {
+      background: darken(white, 5%);
     }
   }
   &.bugar-size-big {
@@ -176,7 +173,7 @@ $grey: gray;
       color: $grey;
     }
   }
-  >.bugar-loadingIndicator{
+  > .bugar-loadingIndicator{
     width: 14px;
     height: 14px;
     display: inline-block;
@@ -185,7 +182,7 @@ $grey: gray;
     border-color: $blue $blue $blue transparent;
     border-style: solid;
     border-width: 2px;
-    animation: bugar-spin 1s infinite linear
+    animation: bugar-spin 1s infinite linear;
   }
 }
 @keyframes bugar-spin {

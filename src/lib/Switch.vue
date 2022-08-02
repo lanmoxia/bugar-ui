@@ -13,7 +13,7 @@ export default {
     value: Boolean
   },
 }
-  export const toggle = () => {
+export const toggle = () => {
     context.emit("update:value", !props.value);
 }
 </script>

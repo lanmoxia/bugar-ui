@@ -5,15 +5,15 @@
       <div class="bugar-dialog-wrapper">
         <div class="bugar-dialog">
           <header>
-            <slot name="title"/>
+            <slot name="title" />
             <span @click="close" class="bugar-dialog-close"></span>
           </header>
           <main>
-            <slot name="content"/>
+            <slot name="content" />
           </main>
           <footer>
-            <Button level="main" @click="onclickOk">OK</Button>
-            <Button @click="onclickCancel">Cancel</Button>
+            <Button level="main" @click="onClickOk">OK</Button>
+            <Button @click="onClickCancel">Cancel</Button>
           </footer>
         </div>
       </div>
@@ -23,7 +23,7 @@
 
 <script lang="ts" setup="props, context">
 import { SetupContext } from 'vue';
-import Button from './Button.vue';
+import Button from "./Button.vue";
 declare const props: {
   visible: boolean;
   closeOnClickOverlay: boolean;
@@ -32,24 +32,26 @@ declare const props: {
 }
 declare const context: SetupContext
 export default {
-  components: {Button},
   props: {
+    visible: {
+      type: Boolean,
+      default: false
+    },
+    closeOnClickOverlay: {
+      type: Boolean,
+      default: true
+    },
     ok: {
       type: Function
     },
     cancel: {
       type: Function
-    },
-    closeOnClickOverlay: { // 设置 close 开关
-      type: Boolean,
-      default: true
-    },
-    visible: {
-      type: Boolean,
-      default: false
     }
-  }
-}
+  },
+  components: {
+    Button,
+  },
+};
 export const close = () => {
   context.emit('update:visible', false)
 }
@@ -58,12 +60,12 @@ export const onClickOverlay = () => {
     close()
   }
 }
-export const onclickOk = () => {
+export const onClickOk = () => {
   if (props.ok && props.ok() !== false) {
     close()
   }
 }
-export const onclickCancel = () => {
+export const onClickCancel = () => {
   props.cancel && props.cancel()
   close()
 }
