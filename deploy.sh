@@ -9,5 +9,5 @@ git branch -M main &&
 git remote add origin git@github.com:lanmoxia/bugar-ui-site.git &&
 git push -f -u origin main &&
 cd ..
-echo https://lanmoxia.github.io/bugar-ui-site/index.html
+echo https://lanmoxia.github.io/bugar-ui-site/#/
 

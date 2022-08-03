@@ -5,69 +5,59 @@
       <div class="bugar-dialog-wrapper">
         <div class="bugar-dialog">
           <header>
-            <slot name="title" />
+            <slot name="title"/>
             <span @click="close" class="bugar-dialog-close"></span>
           </header>
           <main>
-            <slot name="content" />
+            <slot name="content"/>
           </main>
           <footer>
-            <Button level="main" @click="onClickOk">OK</Button>
-            <Button @click="onClickCancel">Cancel</Button>
+            <Button level="main" @click="ok">OK</Button>
+            <Button @click="cancel">Cancel</Button>
           </footer>
         </div>
       </div>
     </Teleport>
   </template>
 </template>
-
-<script lang="ts" setup="props, context">
-import { SetupContext } from 'vue';
-import Button from "./Button.vue";
-declare const props: {
-  visible: boolean;
-  closeOnClickOverlay: boolean;
-  ok: () => boolean;
-  cancel: () => void
-}
-declare const context: SetupContext
+<script>
+import Button from './Button.vue'
 export default {
+  components: {Button},
   props: {
-    visible: {
-      type: Boolean,
-      default: false
-    },
-    closeOnClickOverlay: {
-      type: Boolean,
-      default: true
-    },
     ok: {
       type: Function
     },
     cancel: {
       type: Function
+    },
+    closeOnClickOverlay: { // 设置 close 开关
+      type: Boolean,
+      default: true
+    },
+    visible: {
+      type: Boolean,
+      default: false
     }
   },
-  components: {
-    Button,
-  },
-};
-export const close = () => {
-  context.emit('update:visible', false)
-}
-export const onClickOverlay = () => {
-  if (props.closeOnClickOverlay) {
-    close()
+  setup(props, context){
+    const close = () => {
+      context.emit('update:visible', false)
+    }
+    const onClickOverlay = () => {
+      if(props.closeOnClickOverlay){close()}
+    }
+    const ok = () => {
+      if(props.ok && props.ok() !== false){ // 简写
+        close()
+      }
+    }
+    const cancel = () => {
+      props.cancel && props.cancel()
+      close()
+    }
+    return {close, onClickOverlay, ok, cancel}
   }
-}
-export const onClickOk = () => {
-  if (props.ok && props.ok() !== false) {
-    close()
-  }
-}
-export const onClickCancel = () => {
-  props.cancel && props.cancel()
-  close()
 }
 </script>
 
