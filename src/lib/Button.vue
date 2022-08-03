@@ -13,30 +13,6 @@ declare const props: {
   disabled: boolean;
   loading: boolean;
 }
-export default {
-  props: {
-    theme: {
-      type: String,
-      default: "button",
-    },
-    size: {
-      type: String,
-      default: "normal",
-    },
-    level: {
-      type: String,
-      default: "normal",
-    },
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
-    loading: {
-      type: Boolean,
-      default: false
-    }
-  },
-};
 const { theme, size, level } = props;
 export const classes = computed(() => {
   return {
