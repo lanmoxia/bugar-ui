@@ -1,7 +1,7 @@
 {
   "name": "bugar-ui",
-  "version": "0.0.5",
-  "description": "这是一个 UI 库",
+  "version": "0.0.6",
+  "description": "这是一个学习的 UI 库",
   "files": [
     "dist/lib/*"
   ],
