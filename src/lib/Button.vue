@@ -1,6 +1,6 @@
 <template>
   <!--因为 props 写了 disabled 所以不会继承 这里还要绑定下 disabled-->
-  <button class="bugar-button" :class="classes" :disabled="disabled">
+  <button class="bugar-button" :class="classes" :disabled="disabled" @click="$emit('click')">
     <span v-if="loading" class="bugar-loadingIndicator"></span>
     <slot></slot>
   </button>
@@ -10,6 +10,7 @@
 import {computed} from 'vue';
 
 export default {
+  emits: ['click'],
   // 这样设置默认值 可以解决第一个 button 是 theme-undefined 的问题
   props: {
     theme: {
