@@ -16,30 +16,17 @@
   </div>
 </template>
 
-<script lang="ts">
-import {Button, Dialog} from '../lib/index'
-import {ref} from 'vue'
+<script setup lang="ts">
+import { Button, Dialog } from '../lib/index'
+import { ref } from 'vue'
 
-export default {
-  components: {
-    Dialog,
-    Button
-  },
-  setup() {
-    const x = ref(false)
-    const toggle = () => {
-      x.value = !x.value
-    }
-    const f1 = () => {
-      return false
-    }
-    const f2 = () => {}
-    return {
-      x,
-      toggle,
-      f1,
-      f2
-    }
-  }
+const x = ref(false)
+const toggle = () => {
+  x.value = !x.value
 }
+const f1 = () => {
+  return false
+}
+const f2 = () => { }
+
 </script>

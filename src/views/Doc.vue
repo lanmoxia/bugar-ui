@@ -1,10 +1,10 @@
 <template>
   <div class="layout">
-    <TopNav :toggle-menu-button-visible="true" class="nav"/>
+    <TopNav :toggle-menu-button-visible="true" class="nav" />
     <div class="content">
       <aside v-if="menuVisible">
         <h2>文档</h2>
-        <ol>
+        <!-- <ol>
           <li>
             <router-link to="/doc/intro">介绍</router-link>
           </li>
@@ -14,7 +14,7 @@
           <li>
             <router-link to="/doc/get-started">开始</router-link>
           </li>
-        </ol>
+        </ol> -->
         <h2 class="titleText">组件列表</h2>
         <ol>
           <li>
@@ -32,23 +32,16 @@
         </ol>
       </aside>
       <main>
-        <router-view/>
+        <router-view />
       </main>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import TopNav from '../components/TopNav.vue';
-import {inject, Ref} from 'vue';
-
-export default {
-  components: {TopNav},
-  setup() {
-    const menuVisible = inject<Ref<boolean>>('menuVisible'); // 相当于 get
-    return {menuVisible};
-  }
-};
+<script setup lang="ts">
+import TopNav from '../components/TopNav.vue'
+import { inject, Ref } from 'vue'
+const menuVisible = inject<Ref<boolean>>('menuVisible')
 </script>
 
 <style lang="scss" scoped>
@@ -57,14 +50,15 @@ export default {
   flex-direction: column;
   height: 100vh;
 
-  > .nav {
+  >.nav {
     flex-shrink: 0;
   }
 
-  > .content {
+  >.content {
     flex-grow: 1;
     padding-top: 60px;
     padding-left: 156px;
+
     @media (max-width: 500px) {
       padding-left: 0;
     }
@@ -74,11 +68,11 @@ export default {
 .content {
   display: flex;
 
-  > aside {
+  >aside {
     flex-shrink: 0;
   }
 
-  > main {
+  >main {
     flex-grow: 1;
     padding: 16px;
     background: white;
@@ -94,19 +88,25 @@ aside {
   height: 100%;
   background-image: linear-gradient(to top, #dfe9f3 0%, #f7fbff 100%);
   z-index: 1;
-  > h2 {
+
+  >h2 {
     margin-bottom: 4px;
     padding: 0 16px;
   }
-  > .titleText{margin-top: 15px}
-  > ol {
-    > li {
-      > a{
+
+  >.titleText {
+    margin-top: 15px
+  }
+
+  >ol {
+    >li {
+      >a {
         display: block;
         padding: 4px 16px;
         text-decoration: none;
       }
-      .router-link-active{
+
+      .router-link-active {
         background: white;
         border-right: 3px solid #a7b6c6;
         color: #11273a;

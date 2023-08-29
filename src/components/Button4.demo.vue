@@ -7,11 +7,6 @@
   <Button theme="text" disabled>禁用按钮</Button>
 </template>
 
-<script lang="ts">
-import {Button} from "../lib/index";
-export default {
-  components: {
-    Button
-  }
-}
+<script setup lang="ts">
+import { Button } from "../lib/index"
 </script>

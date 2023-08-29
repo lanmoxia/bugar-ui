@@ -1,9 +1,7 @@
 import Dialog from './Dialog.vue'
-import {createApp, h} from 'vue'; //提供挂载的 API
-export const openDialog = (options) => {
-  const {title, content, ok, cancel} = options
-  // 直接把 Dialog 放到 body 中会覆盖之前的
-  // 这里创建一个临时 div 放到 body 上
+import { createApp, h } from 'vue'
+export const openDialog = (options: any) => {
+  const { title, content, ok, cancel } = options
   const div = document.createElement('div')
   document.body.appendChild(div)
   const close = () => {
@@ -12,7 +10,7 @@ export const openDialog = (options) => {
   }
   // 定义名字方便销毁
   const app = createApp({
-    render(){
+    render() {
       return h(
         Dialog,
         {
@@ -20,18 +18,17 @@ export const openDialog = (options) => {
           cancel,
           visible: true,
           'onUpdate:visible': (newVisible) => { // 监听 visible 事件
-            if(newVisible === false){
+            if (newVisible === false) {
               close()
             }
           }
         },
-        {title:title, content: content}
+        {
+          title: () => h('strong', title),
+          content: () => h('div', [h('p', content)])
+        }
       )
     }
   })
-  // vue 语法 必须跟上边是分开的
-  // 上边的 app 是CreateApp() 返回的 而不是 .mount(div) 返回的
   app.mount(div)
 }
-// 这里的 visible:true 写死的 所以点击不能关闭 Dialog
-// 关闭 Dialog 也就是销毁 CreateApp 这里先在 div 卸载 再销毁 div

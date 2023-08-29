@@ -18,28 +18,23 @@
   </div>
 </template>
 
-<script lang="ts">
-import {inject, Ref} from 'vue';
-
-export default {
-  props:{
-    toggleMenuButtonVisible: {
-      type: Boolean,
-      default: false
-    }
-  },
-  setup() {
-    const menuVisible = inject<Ref<boolean>>('menuVisible'); // 相当于 get
-    const toggleMenu = () => {
-      menuVisible.value = !menuVisible.value;
-    };
-    return {toggleMenu};
+<script setup lang="ts">
+import { inject, ref, Ref } from 'vue'
+const props = defineProps({
+  toggleMenuButtonVisible: {
+    type: Boolean,
+    default: false
   }
-};
+})
+const menuVisible = inject<Ref<boolean>>('menuVisible', ref(false))
+const toggleMenu = () => {
+  menuVisible.value = !menuVisible.value
+}
 </script>
 
 <style lang="scss" scoped>
 $color: rgb(28 65 99);
+
 .topNav {
   color: $color;
   background-image: linear-gradient(to top, #f3f8fd 0%, #fff 100%);
@@ -52,7 +47,8 @@ $color: rgb(28 65 99);
   z-index: 10;
   justify-content: center;
   align-items: center;
-  &::after{
+
+  &::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -61,7 +57,8 @@ $color: rgb(28 65 99);
     height: 2px;
     background: #243d54;
   }
-  > .logo {
+
+  >.logo {
     margin-right: auto;
     display: flex;
     justify-content: center;
@@ -69,41 +66,47 @@ $color: rgb(28 65 99);
     background: #243d54;
     border-radius: 50%;
     border: 2px solid white;
-    -moz-box-shadow:0 8px 0 #243d54; -webkit-box-shadow:0 8px 0 #243d54; box-shadow:0 8px 0 #243d54;
-    > svg{
+    -moz-box-shadow: 0 8px 0 #243d54;
+    -webkit-box-shadow: 0 8px 0 #243d54;
+    box-shadow: 0 8px 0 #243d54;
+
+    >svg {
       width: 40px;
       height: 40px;
     }
   }
 
-  > .menu {
+  >.menu {
     display: flex;
     white-space: nowrap;
     flex-wrap: nowrap;
     color: #243d54;
   }
 
-  > .toggleAside {
+  >.toggleAside {
     position: absolute;
     left: 16px;
     top: 50%;
     transform: translateY(-50%);
     display: none;
     text-align: center;
-    > svg{
+
+    >svg {
       width: 25px;
       height: 25px;
     }
   }
 
   @media (max-width: 500px) {
-    > .menu {
+    >.menu {
       display: none;
     }
-    > .logo {
+
+    >.logo {
       margin: 0 auto;
     }
-    > .toggleAside {
+
+    >.toggleAside {
       display: inline-block;
     }
   }

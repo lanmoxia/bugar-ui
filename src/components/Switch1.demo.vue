@@ -1,18 +1,10 @@
 <demo>常规用法</demo>
 <template>
-  <Switch v-model:value="bool"/>
+  <Switch v-model:value="bool" />
 </template>
 
-<script lang="ts">
-import {Switch} from '../lib/index'
-import {ref} from 'vue';
-export default {
-  components: {Switch},
-  setup(){
-    const bool = ref(false)
-    return {
-      bool
-    }
-  }
-}
+<script setup lang="ts">
+import { Switch } from '../lib/index'
+import { ref } from 'vue'
+const bool = ref(false)
 </script>

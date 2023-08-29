@@ -1,53 +1,48 @@
 <template>
-  <!--因为 props 写了 disabled 所以不会继承 这里还要绑定下 disabled-->
-  <button class="bugar-button" :class="classes" :disabled="disabled" @click="$emit('click')">
+  <button class="bugar-button" :class="classes" :disabled="disabled" @click="handleClick">
     <span v-if="loading" class="bugar-loadingIndicator"></span>
     <slot></slot>
   </button>
 </template>
 
-<script lang="ts">
-import {computed} from 'vue';
-
-export default {
-  emits: ['click'],
-  // 这样设置默认值 可以解决第一个 button 是 theme-undefined 的问题
-  props: {
-    theme: {
-      type: String,
-      default: 'button'
-    },
-    size: {
-      type: String,
-      default: 'normal'
-    },
-    level: {
-      type: String,
-      default: 'normal'
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    loading: {
-      type: Boolean,
-      default: false
-    }
-  },
-  setup(props){
-    const {theme, size, level, disabled, loading} = props
-    const classes = computed(() => {
-      return {
-        [`bugar-theme-${theme}`]: theme,
-        [`bugar-size-${size}`]: size,
-        [`bugar-level-${level}`]: level,
-        [`bugar-disabled-${disabled}`]: disabled,
-        [`bugar-loading-${loading}`]: loading
-      }
-    })
-    return {classes}
-  }
+<script setup lang="ts">
+import { computed } from 'vue'
+const emit = defineEmits(['click'])
+const handleClick = () => {
+  emit('click')
 }
+const props = defineProps({
+  theme: {
+    type: String,
+    default: 'button'
+  },
+  size: {
+    type: String,
+    default: 'normal'
+  },
+  level: {
+    type: String,
+    default: 'normal'
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  loading: {
+    type: Boolean,
+    default: false
+  }
+})
+const { theme, size, level, disabled, loading } = props
+const classes = computed(() => {
+  return {
+    [`bugar-theme-${theme}`]: theme,
+    [`bugar-size-${size}`]: size,
+    [`bugar-level-${level}`]: level,
+    [`bugar-disabled-${disabled}`]: disabled,
+    [`bugar-loading-${loading}`]: loading
+  }
+})
 </script>
 
 <style lang="scss">
@@ -58,6 +53,7 @@ $blue: #40a9ff;
 $radius: 4px;
 $red: red;
 $grey: gray;
+
 .bugar-button {
   box-sizing: border-box;
   height: $h;
@@ -73,62 +69,78 @@ $grey: gray;
   border-radius: $radius;
   box-shadow: 0 1px 0 fade-out(black, 0.95);
   transition: background 250ms;
-  //&+& 是 bugar-button+bugar-button 的意思
-  & + & {
+
+  &+& {
     margin-left: 8px;
   }
+
   &:hover,
   &:focus {
     color: $blue;
     border-color: $blue;
   }
+
   &:focus {
     outline: none;
   }
+
   &::-moz-focus-inner {
     border: 0;
   }
-  &.bugar-theme-link{
+
+  &.bugar-theme-link {
     border-color: transparent;
     box-shadow: none;
     color: $blue;
-    &:hover,&:focus{
+
+    &:hover,
+    &:focus {
       color: lighten($blue, 10%);
     }
   }
-  &.bugar-theme-text{
+
+  &.bugar-theme-text {
     border-color: transparent;
     box-shadow: none;
     color: inherit;
-    &:hover,&:focus{
-      background: darken(white, 5%);;
+
+    &:hover,
+    &:focus {
+      background: darken(white, 5%);
+      ;
     }
   }
+
   &.bugar-size-big {
     font-size: 24px;
     height: 48px;
     padding: 0 16px;
   }
+
   &.bugar-size-small {
     font-size: 12px;
     height: 20px;
     padding: 0 4px;
   }
+
   &.bugar-theme-button {
     &.bugar-level-main {
       background: $blue;
       color: white;
       border-color: $blue;
+
       &:hover,
       &:focus {
         background: darken($blue, 10%);
         border-color: darken($blue, 10%);
       }
     }
+
     &.bugar-level-danger {
       background: $red;
       border-color: $red;
       color: white;
+
       &:hover,
       &:focus {
         background: darken($red, 10%);
@@ -136,47 +148,58 @@ $grey: gray;
       }
     }
   }
+
   &.bugar-theme-link {
     &.bugar-level-danger {
       color: $red;
+
       &:hover,
       &:focus {
         color: darken($red, 10%);
       }
     }
   }
+
   &.bugar-theme-text {
     &.bugar-level-main {
       color: $blue;
+
       &:hover,
       &:focus {
         color: darken($blue, 10%);
       }
     }
+
     &.bugar-level-danger {
       color: $red;
+
       &:hover,
       &:focus {
         color: darken($red, 10%);
       }
     }
   }
+
   &.bugar-theme-button {
     &[disabled] {
       cursor: not-allowed;
       color: $grey;
+
       &:hover {
         border-color: $grey;
       }
     }
   }
-  &.bugar-theme-link, &.bugar-theme-text {
+
+  &.bugar-theme-link,
+  &.bugar-theme-text {
     &[disabled] {
       cursor: not-allowed;
       color: $grey;
     }
   }
-  >.bugar-loadingIndicator{
+
+  >.bugar-loadingIndicator {
     width: 14px;
     height: 14px;
     display: inline-block;
@@ -188,8 +211,14 @@ $grey: gray;
     animation: bugar-spin 1s infinite linear
   }
 }
+
 @keyframes bugar-spin {
-  0%{transform: rotate(0deg)}
-  100%{transform: rotate(360deg)}
+  0% {
+    transform: rotate(0deg)
+  }
+
+  100% {
+    transform: rotate(360deg)
+  }
 }
 </style>
