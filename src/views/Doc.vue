@@ -4,7 +4,7 @@
     <div class="content">
       <aside v-if="menuVisible">
         <h2>文档</h2>
-        <!-- <ol>
+        <ol>
           <li>
             <router-link to="/doc/intro">介绍</router-link>
           </li>
@@ -12,9 +12,9 @@
             <router-link to="/doc/install">安装</router-link>
           </li>
           <li>
-            <router-link to="/doc/get-started">开始</router-link>
+            <router-link to="/doc/started">开始</router-link>
           </li>
-        </ol> -->
+        </ol>
         <h2 class="titleText">组件列表</h2>
         <ol>
           <li>

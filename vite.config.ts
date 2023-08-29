@@ -1,9 +1,9 @@
 // @ts-nocheck
-import Vue from '@vitejs/plugin-vue'
+import vue from '@vitejs/plugin-vue'
 import fs from "fs"
 import { defineConfig } from 'vite'
 import { baseParse } from '@vue/compiler-core'
-const mdPlugin = require('vite-plugin-markdown')
+import Markdown from 'vite-plugin-md'
 
 const vueDemoPlugin = {
   name: "vue-block-demo",
@@ -23,10 +23,8 @@ const vueDemoPlugin = {
 
 export default defineConfig({
   plugins: [
-    Vue(),
-    mdPlugin.plugin({
-      mode: ['html']
-    }),
+    vue({ include: [/\.vue$/, /\.md$/] }),
+    Markdown(),
     vueDemoPlugin
   ]
 })
