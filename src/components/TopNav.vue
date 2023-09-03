@@ -1,25 +1,23 @@
 <template>
   <div class="topNav">
     <router-link to="/" class="logo">
-      <svg class="icon">
-        <use xlink:href="#icon-logo"></use>
-      </svg>
+      <SvgIcon class="icon" name="logo" />
     </router-link>
-    <ul class="menu">
-      <li>
-        <router-link to="/doc">文档</router-link>
-      </li>
-    </ul>
+    <div class="link-icon">
+      <a href="https://github.com/lanmoxia/bugar-ui" target="_blank">
+        <SvgIcon name="github" />
+      </a>
+    </div>
     <div v-if="toggleMenuButtonVisible" class="toggleAside" @click="toggleMenu">
-      <svg class="icon">
-        <use xlink:href="#icon-menu"></use>
-      </svg>
+      <SvgIcon name="icon-menu" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { inject, ref, Ref } from 'vue'
+import SvgIcon from '../components/SvgIcon.vue'
+
 const props = defineProps({
   toggleMenuButtonVisible: {
     type: Boolean,
@@ -39,7 +37,7 @@ $color: rgb(28 65 99);
   color: $color;
   background-image: linear-gradient(to top, #f3f8fd 0%, #fff 100%);
   display: flex;
-  padding: 2px 15px;
+  padding: 8px 18px;
   position: fixed;
   top: 0;
   left: 0;
@@ -63,24 +61,26 @@ $color: rgb(28 65 99);
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #243d54;
-    border-radius: 50%;
-    border: 2px solid white;
-    -moz-box-shadow: 0 8px 0 #243d54;
-    -webkit-box-shadow: 0 8px 0 #243d54;
-    box-shadow: 0 8px 0 #243d54;
 
     >svg {
-      width: 40px;
-      height: 40px;
+      font-size: 30px;
     }
   }
 
-  >.menu {
+  >.link-icon {
     display: flex;
     white-space: nowrap;
     flex-wrap: nowrap;
     color: #243d54;
+
+    >a {
+      display: block;
+
+      >svg {
+        width: 30px;
+        height: 30px;
+      }
+    }
   }
 
   >.toggleAside {

@@ -4,6 +4,8 @@ import fs from "fs"
 import { defineConfig } from 'vite'
 import { baseParse } from '@vue/compiler-core'
 import Markdown from 'vite-plugin-md'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import path from 'path'
 
 const vueDemoPlugin = {
   name: "vue-block-demo",
@@ -25,7 +27,11 @@ export default defineConfig({
   plugins: [
     vue({ include: [/\.vue$/, /\.md$/] }),
     Markdown(),
-    vueDemoPlugin
+    vueDemoPlugin,
+    createSvgIconsPlugin({
+      iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
+      symbolId: 'icon-[dir]-[name]'
+    })
   ]
 })
 
