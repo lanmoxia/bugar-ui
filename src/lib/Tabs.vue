@@ -60,7 +60,7 @@ const select = (title: string) => {
 </script>
 
 <style lang="scss">
-$blue: #40a9ff;
+$blue: rgb(36, 61, 84);
 $color: #333;
 $border-color: #d9d9d9;
 

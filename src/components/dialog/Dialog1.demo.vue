@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { Button, Dialog } from '../lib/index'
+import { Button, Dialog } from '../../lib/index'
 import { ref } from 'vue'
 
 const x = ref(false)

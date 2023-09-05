@@ -44,10 +44,6 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import SvgIcon from '../components/SvgIcon.vue'
-</script>
-
 <style lang="scss" scoped>
 $buttonBlue: rgb(28 65 99);
 $color: rgb(100 131 159);

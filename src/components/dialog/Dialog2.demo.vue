@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import { h } from 'vue'
-import { Button, openDialog } from '../lib/index'
+import { Button, openDialog } from '../../lib/index'
 const showDialog = () => {
   openDialog({
     title: h('strong', {}, '标题'),

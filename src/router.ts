@@ -1,12 +1,13 @@
-import Home from './views/Home.vue'
-import Doc from './views/Doc.vue'
-import SwitchDemo from './components/SwitchDemo.vue'
-import ButtonDemo from './components/ButtonDemo.vue'
-import DialogDemo from './components/DialogDemo.vue'
-import TabsDemo from './components/TabsDemo.vue'
-import intro from './markdown/intro.md'
-import install from './markdown/install.md'
-import started from './markdown/started.md'
+const Home = () => import('./views/Home.vue')
+const Doc = () => import('./views/Doc.vue')
+const SwitchDemo = () => import('./components/SwitchDemo.vue')
+const ButtonDemo = () => import('./components/ButtonDemo.vue')
+const DialogDemo = () => import('./components/DialogDemo.vue')
+const TabsDemo = () => import('./components/TabsDemo.vue')
+const InputDemo = () => import('./components/InputDemo.vue')
+const intro = () => import('./markdown/intro.md')
+const install = () => import('./markdown/install.md')
+const started = () => import('./markdown/started.md')
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 const history = createWebHashHistory()
@@ -24,6 +25,7 @@ export const router = createRouter({
         { path: 'button', component: ButtonDemo },
         { path: 'dialog', component: DialogDemo },
         { path: 'tabs', component: TabsDemo },
+        { path: 'input', component: InputDemo },
       ]
     }
   ]

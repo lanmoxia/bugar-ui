@@ -48,17 +48,16 @@ const classes = computed(() => {
 <style lang="scss">
 $h: 32px;
 $border-color: #d9d9d9;
-$color: #333;
-$blue: #40a9ff;
+$color: rgba(0, 0, 0, 0.65);
+$blue: rgb(36, 61, 84);
 $radius: 4px;
 $red: red;
-$grey: gray;
+$gray: gray;
 
 .bugar-button {
   box-sizing: border-box;
   height: $h;
   padding: 0 12px;
-  cursor: pointer;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -95,7 +94,7 @@ $grey: gray;
 
     &:hover,
     &:focus {
-      color: lighten($blue, 10%);
+      color: lighten($blue, 20%);
     }
   }
 
@@ -183,10 +182,10 @@ $grey: gray;
   &.bugar-theme-button {
     &[disabled] {
       cursor: not-allowed;
-      color: $grey;
+      color: $gray;
 
       &:hover {
-        border-color: $grey;
+        border-color: $gray;
       }
     }
   }
@@ -195,7 +194,7 @@ $grey: gray;
   &.bugar-theme-text {
     &[disabled] {
       cursor: not-allowed;
-      color: $grey;
+      color: $gray;
     }
   }
 

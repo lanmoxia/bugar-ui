@@ -22,5 +22,5 @@
 </template>
 
 <script setup lang="ts">
-import { Button } from "../lib/index"
+import { Button } from "../../lib/index"
 </script>

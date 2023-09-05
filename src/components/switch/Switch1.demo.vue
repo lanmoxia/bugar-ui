@@ -4,7 +4,7 @@
 </template>
 
 <script setup lang="ts">
-import { Switch } from '../lib/index'
+import { Switch } from '../../lib/index'
 import { ref } from 'vue'
 const bool = ref(false)
 </script>

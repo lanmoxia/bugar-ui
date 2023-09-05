@@ -8,7 +8,7 @@
         <SvgIcon name="github" />
       </a>
     </div>
-    <div v-if="toggleMenuButtonVisible" class="toggleAside" @click="toggleMenu">
+    <div v-if="menuVisible" class="toggleAside" @click="toggleMenu">
       <SvgIcon name="icon-menu" />
     </div>
   </div>
@@ -16,7 +16,6 @@
 
 <script setup lang="ts">
 import { inject, ref, Ref } from 'vue'
-import SvgIcon from '../components/SvgIcon.vue'
 
 const props = defineProps({
   toggleMenuButtonVisible: {

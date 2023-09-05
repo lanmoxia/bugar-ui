@@ -75,7 +75,6 @@ $color: #243d54;
   height: 100vh;
 
   .nav {
-    position: relative;
     z-index: 999;
 
     &::after {
@@ -92,7 +91,7 @@ $color: #243d54;
   .content {
     display: flex;
     flex-grow: 1;
-    margin-top: 40px;
+    margin-top: 80px;
     position: relative;
 
     main {
