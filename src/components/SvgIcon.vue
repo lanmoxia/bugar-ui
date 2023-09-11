@@ -1,5 +1,5 @@
 <template>
-    <svg :class="svgClass" v-bind="$attrs" :style="{ color: color }">
+    <svg :class="svgClass" v-bind="$attrs" :style="{ color, width: iconSize, height: iconSize }">
         <use :href="iconName" />
     </svg>
 </template>
@@ -14,7 +14,11 @@ const props = defineProps({
     },
     color: {
         type: String,
-        default: 'gray'
+        default: ''
+    },
+    iconSize: {
+        type: String,
+        default: '18px'
     }
 })
 

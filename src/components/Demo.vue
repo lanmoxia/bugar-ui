@@ -65,6 +65,8 @@ $border-color: #d9d9d9;
 
   &-component {
     padding: 0 0 16px 16px;
+    display: inline-flex;
+    flex-direction: column;
   }
 
   &-actions {

@@ -12,12 +12,18 @@
       <h2>代码示例</h2>
     </section>
     <Demo :component="Input1Demo" />
+    <Demo :component="Input2Demo" />
+    <Demo :component="Input3Demo" />
+    <Demo :component="Input4Demo" />
   </div>
 </template>
   
 <script setup lang="ts">
 import Demo from "./Demo.vue"
 import Input1Demo from "./input/Input1.demo.vue"
+import Input2Demo from "./input/Input2.demo.vue"
+import Input3Demo from "./input/Input3.demo.vue"
+import Input4Demo from "./input/Input4.demo.vue"
 </script>
   
 <style lang="scss">
