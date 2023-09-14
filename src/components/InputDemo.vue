@@ -15,6 +15,10 @@
     <Demo :component="Input2Demo" />
     <Demo :component="Input3Demo" />
     <Demo :component="Input4Demo" />
+    <Demo :component="Search1Demo" />
+    <Demo :component="Search2Demo" />
+    <Demo :component="Textarea1Demo" />
+    <Demo :component="Textarea2Demo" />
   </div>
 </template>
   
@@ -24,6 +28,10 @@ import Input1Demo from "./input/Input1.demo.vue"
 import Input2Demo from "./input/Input2.demo.vue"
 import Input3Demo from "./input/Input3.demo.vue"
 import Input4Demo from "./input/Input4.demo.vue"
+import Search1Demo from "./input/Search1.demo.vue"
+import Search2Demo from "./input/Search2.demo.vue"
+import Textarea1Demo from "./input/Textarea1.demo.vue"
+import Textarea2Demo from "./input/Textarea2.demo.vue"
 </script>
   
 <style lang="scss">
