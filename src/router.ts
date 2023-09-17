@@ -5,6 +5,7 @@ const ButtonDemo = () => import('./components/ButtonDemo.vue')
 const DialogDemo = () => import('./components/DialogDemo.vue')
 const TabsDemo = () => import('./components/TabsDemo.vue')
 const InputDemo = () => import('./components/InputDemo.vue')
+const GridDemo = () => import('./components/GridDemo.vue')
 const intro = () => import('./markdown/intro.md')
 const install = () => import('./markdown/install.md')
 const started = () => import('./markdown/started.md')
@@ -26,6 +27,7 @@ export const router = createRouter({
         { path: 'dialog', component: DialogDemo },
         { path: 'tabs', component: TabsDemo },
         { path: 'input', component: InputDemo },
+        { path: 'grid', component: GridDemo },
       ]
     }
   ]

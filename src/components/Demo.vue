@@ -22,7 +22,7 @@ import Button from '../lib/Button.vue'
 const props = defineProps({
   component: {
     type: Object,
-    required: false,
+    required: true,
     default: () => { }
   }
 })
@@ -64,8 +64,8 @@ $border-color: #d9d9d9;
   }
 
   &-component {
-    padding: 0 0 16px 16px;
-    display: inline-flex;
+    padding: 0 16px 16px 16px;
+    display: flex;
     flex-direction: column;
   }
 
