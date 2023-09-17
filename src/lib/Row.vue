@@ -11,16 +11,50 @@ const props = defineProps({
   // 间隙
   gutter: {
     type: [String, Number]
+  },
+  direction: {
+    type: String,
+    validator: function (value: string) {
+      return [
+        "row",
+        "row-reverse",
+        "column",
+        "column-reverse",
+      ].includes(value)
+    }
+  },
+
+  justify: {
+    type: String,
+    validator: function (value: string) {
+      return [
+        "start",
+        "end",
+        "center",
+        "space-around",
+        "space-between",
+      ].includes(value)
+    }
+  },
+
+  align: {
+    type: String,
+    validator: function (value: string) {
+      return ["flex-start", "center", "flex-end", "stretch"].includes(value)
+    }
   }
 })
 
-const { gutter } = props
+const { gutter, direction, justify, align } = props
 provide('gutter', gutter)
 const rowStyles = computed(() => {
   const gutterValue = Number(gutter)
   return {
     marginLeft: -gutterValue / 2 + "px",
     marginRight: -gutterValue / 2 + "px",
+    justifyContent: justify,
+    alignItems: align,
+    flexDirection: direction
   } as CSSProperties
 })
 </script>

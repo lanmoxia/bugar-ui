@@ -12,12 +12,20 @@
       <h2>代码示例</h2>
     </section>
     <Demo :component="Grid1Demo" />
+    <Demo :component="Grid2Demo" />
+    <Demo :component="Grid3Demo" />
+    <Demo :component="Grid4Demo" />
+    <Demo :component="Grid5Demo" />
   </div>
 </template>
 
 <script setup lang="ts">
 import Demo from "./Demo.vue"
 import Grid1Demo from "./grid/Grid1.demo.vue"
+import Grid2Demo from "./grid/Grid2.demo.vue"
+import Grid3Demo from "./grid/Grid3.demo.vue"
+import Grid4Demo from "./grid/Grid4.demo.vue"
+import Grid5Demo from "./grid/Grid5.demo.vue"
 </script>
 
 <style lang="scss">
