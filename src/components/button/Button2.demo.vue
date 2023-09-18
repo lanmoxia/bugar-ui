@@ -1,6 +1,6 @@
 <demo>
-支持 size
-</demo>
+  支持 size
+  </demo>
 <template>
   <div>
     <div>
@@ -20,7 +20,8 @@
     </div>
   </div>
 </template>
-
+  
 <script setup lang="ts">
 import { Button } from "../../lib/index"
 </script>
+  

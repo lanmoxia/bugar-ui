@@ -1,6 +1,6 @@
 <template>
   <button class="bugar-button" :class="classes" :disabled="disabled" @click="handleClick">
-    <span v-if="loading" class="bugar-loadingIndicator"></span>
+    <span v-show="loading" class="bugar-loadingIndicator"></span>
     <slot></slot>
   </button>
 </template>
@@ -9,7 +9,7 @@
 import { computed } from 'vue'
 const emit = defineEmits(['click'])
 const handleClick = () => {
-  emit('click')
+  emit('click', props.loading)
 }
 const props = defineProps({
   theme: {
@@ -33,14 +33,14 @@ const props = defineProps({
     default: false
   }
 })
-const { theme, size, level, disabled, loading } = props
+const { theme, size, level } = props
 const classes = computed(() => {
   return {
     [`bugar-theme-${theme}`]: theme,
     [`bugar-size-${size}`]: size,
     [`bugar-level-${level}`]: level,
-    [`bugar-disabled-${disabled}`]: disabled,
-    [`bugar-loading-${loading}`]: loading
+    [`bugar-disabled-${props.disabled}`]: props.disabled,
+    [`bugar-loading-${props.loading}`]: props.loading
   }
 })
 </script>
@@ -53,11 +53,13 @@ $blue: rgb(36, 61, 84);
 $radius: 4px;
 $red: red;
 $gray: gray;
+$disabledColor: rgba(0, 0, 0, 0.25);
 
 .bugar-button {
   box-sizing: border-box;
   height: $h;
-  padding: 0 12px;
+  padding: 0 10px;
+  cursor: pointer;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -67,14 +69,13 @@ $gray: gray;
   border: 1px solid $border-color;
   border-radius: $radius;
   box-shadow: 0 1px 0 fade-out(black, 0.95);
-  transition: background 250ms;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 
   &+& {
     margin-left: 8px;
   }
 
-  &:hover,
-  &:focus {
+  &:hover {
     color: $blue;
     border-color: $blue;
   }
@@ -87,42 +88,43 @@ $gray: gray;
     border: 0;
   }
 
-  &.bugar-theme-link {
-    border-color: transparent;
-    box-shadow: none;
-    color: $blue;
+  &.bugar-theme-nofocus {
+    &:hover {
+      color: $blue;
+      border-color: $blue;
+    }
 
-    &:hover,
-    &:focus {
-      color: lighten($blue, 20%);
+    &[disabled] {
+      cursor: not-allowed;
+      color: $disabledColor;
+      border-color: $disabledColor;
+      box-shadow: none;
     }
   }
 
-  &.bugar-theme-text {
+  &.bugar-theme-border {
     border-color: transparent;
     box-shadow: none;
-    color: inherit;
 
-    &:hover,
-    &:focus {
-      background: darken(white, 5%);
-      ;
+    &:hover {
+      color: $blue;
+      border-color: $blue;
     }
-  }
 
-  &.bugar-size-big {
-    font-size: 24px;
-    height: 48px;
-    padding: 0 16px;
-  }
-
-  &.bugar-size-small {
-    font-size: 12px;
-    height: 20px;
-    padding: 0 4px;
+    &[disabled] {
+      cursor: not-allowed;
+      color: $disabledColor;
+      border-color: $disabledColor;
+      box-shadow: none;
+    }
   }
 
   &.bugar-theme-button {
+    &:focus {
+      color: $blue;
+      border-color: $blue;
+    }
+
     &.bugar-level-main {
       background: $blue;
       color: white;
@@ -146,9 +148,25 @@ $gray: gray;
         border-color: darken($red, 10%);
       }
     }
+
+    &[disabled] {
+      cursor: not-allowed;
+      color: $disabledColor;
+      border-color: $disabledColor;
+      box-shadow: none;
+    }
   }
 
   &.bugar-theme-link {
+    border-color: transparent;
+    box-shadow: none;
+    color: $blue;
+
+    &:hover,
+    &:focus {
+      color: lighten($blue, 20%);
+    }
+
     &.bugar-level-danger {
       color: $red;
 
@@ -160,6 +178,15 @@ $gray: gray;
   }
 
   &.bugar-theme-text {
+    border-color: transparent;
+    box-shadow: none;
+    color: $color;
+
+    &:hover,
+    &:focus {
+      background: darken(white, 5%);
+    }
+
     &.bugar-level-main {
       color: $blue;
 
@@ -179,23 +206,28 @@ $gray: gray;
     }
   }
 
-  &.bugar-theme-button {
-    &[disabled] {
-      cursor: not-allowed;
-      color: $gray;
-
-      &:hover {
-        border-color: $gray;
-      }
-    }
-  }
-
   &.bugar-theme-link,
   &.bugar-theme-text {
     &[disabled] {
       cursor: not-allowed;
-      color: $gray;
+      color: $disabledColor;
+
+      &:hover {
+        background: none;
+      }
     }
+  }
+
+  &.bugar-size-big {
+    font-size: 24px;
+    height: 48px;
+    padding: 0 16px;
+  }
+
+  &.bugar-size-small {
+    font-size: 12px;
+    height: 20px;
+    padding: 0 4px;
   }
 
   >.bugar-loadingIndicator {
@@ -207,7 +239,7 @@ $gray: gray;
     border-color: $blue $blue $blue transparent;
     border-style: solid;
     border-width: 2px;
-    animation: bugar-spin 1s infinite linear
+    animation: bugar-spin 1s infinite linear;
   }
 }
 
