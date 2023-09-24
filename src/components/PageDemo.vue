@@ -1,23 +1,29 @@
 <template>
   <div class="bugar-button-wrapper">
     <section>
-      <h1>pagination 分页器</h1>
-      <p>选项卡切换组件。</p>
+      <h1>pager 分页</h1>
+      <p>分隔长列表，展示单个页面。</p>
     </section>
     <section>
       <h2>应用场景</h2>
-      <p>平级区域大块内容的的收纳和展现。</p>
+      <p>加载/渲染所有数据开销较大时，每次只加载/渲染单个页面。</p>
     </section>
     <section>
       <h2>代码示例</h2>
     </section>
     <Demo :component="Page1Demo" />
+    <Demo :component="Page2Demo" />
+    <Demo :component="Page3Demo" />
+    <Demo :component="Page4Demo" />
   </div>
 </template>
 
 <script setup lang="ts">
 import Demo from "./Demo.vue"
 import Page1Demo from "./page/Page1.demo.vue"
+import Page2Demo from "./page/Page2.demo.vue"
+import Page3Demo from "./page/Page3.demo.vue"
+import Page4Demo from "./page/Page4.demo.vue"
 </script>
 
 <style lang="scss">

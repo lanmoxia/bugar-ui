@@ -27,7 +27,7 @@
             </li>
             <li>
               <h5>Data</h5>
-              <router-link to="/doc/page">Pagination 分页</router-link>
+              <router-link to="/doc/page">Pager 分页</router-link>
             </li>
             <li>
               <h5>Notice</h5>

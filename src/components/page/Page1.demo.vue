@@ -1,7 +1,6 @@
 <demo>基础用法</demo>
 <template>
-  <Page v-model:currentPage="currentPage" :xxx="currentPage <= 1" :pageSize="pageSize" :total="total"
-    @update:currentPage="changePage" />
+  <Page v-model:currentPage="currentPage" :pageSize="pageSize" :total="total" @update:currentPage="changePage" />
 </template>
 
 <script setup lang="ts">
