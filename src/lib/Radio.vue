@@ -1,9 +1,9 @@
 <template>
-  <div class="bugar-radio">
+  <div class="bugar-radio" :style="{ 'flexDirection': flexColumn }">
     <label class="bugar-radio-item" :class="{ 'radio-disabled': item.disabled }" v-for="(item, index) in options"
       :key="item.value" @click="handleRadioClick(index)">
-      <span class="bugar-radio-icon" :class="{ 'bugar-radio-checked': refIndex === index }"></span>
-      <span class="bugar-radio-text">
+      <span v-if="!isButton" class="bugar-radio-icon" :class="{ 'bugar-radio-checked': refIndex === index }"></span>
+      <span class="bugar-radio-text" :class="classes(index)">
         {{ item.label }}
       </span>
     </label>
@@ -11,9 +11,9 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, ref } from 'vue'
+import { PropType, computed, ref } from 'vue'
 
-const props = defineProps({
+const { options, radioIndex, isColumn, isButton } = defineProps({
   options: {
     type: Array as PropType<{ label: string; value: number; disabled?: boolean }[]>,
     default: () => []
@@ -21,14 +21,36 @@ const props = defineProps({
   radioIndex: {
     type: Number,
     default: 0
+  },
+  isColumn: {
+    type: Boolean,
+    default: false
+  },
+  isButton: {
+    type: Boolean,
+    default: false
   }
 })
 
-const refIndex = ref(props.radioIndex)
+const refIndex = ref(radioIndex)
+
+const flexColumn = computed(() => isColumn ? 'column' : 'row')
+
+const classes = computed(() => (index: number) => {
+  const item = options[index]
+  return {
+    'first-item': index === 0,
+    'last-item': index === options.length - 1,
+    'radio-button-disabled': item.disabled,
+    'radio-button-style': isButton,
+    'radio-button-checked': refIndex.value === index
+  }
+})
 
 const emit = defineEmits(['change:index'])
+
 const handleRadioClick = (index: number) => {
-  const item = props.options[index]
+  const item = options[index]
   if (!item.disabled) {
     refIndex.value = index
     emit('change:index', index)
@@ -109,6 +131,39 @@ const handleRadioClick = (index: number) => {
     padding: 0 8px;
     background-color: #fff;
     transition: all 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+  }
+
+  .radio-button-style {
+    &:hover {
+      color: #1c4163;
+    }
+
+    &.radio-button-disabled {
+      color: rgba(0, 0, 0, 0.15)
+    }
+
+    &.radio-button-checked {
+      background-color: #1c4163;
+      color: #fff;
+      border-color: #1c4163;
+    }
+
+    &.bugar-radio-text {
+      padding: 4px 15px;
+      border: 1px solid;
+      border-color: rgba(0, 0, 0, 0.15);
+      margin-left: -1px;
+
+      &.first-item {
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+      }
+
+      &.last-item {
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+      }
+    }
   }
 }
 </style>

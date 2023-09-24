@@ -12,12 +12,16 @@
       <h2>代码示例</h2>
     </section>
     <Demo :component="Radio1Demo" />
+    <Demo :component="Radio2Demo" />
+    <Demo :component="Radio3Demo" />
   </div>
 </template>
 
 <script setup lang="ts">
 import Demo from "./Demo.vue"
 import Radio1Demo from "./radio/Radio1.demo.vue"
+import Radio2Demo from "./radio/Radio2.demo.vue"
+import Radio3Demo from "./radio/Radio3.demo.vue"
 </script>
 
 <style lang="scss">
