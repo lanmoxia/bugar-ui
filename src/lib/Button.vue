@@ -113,9 +113,13 @@ $disabledColor: rgba(0, 0, 0, 0.25);
 
     &[disabled] {
       cursor: not-allowed;
-      color: $disabledColor;
-      border-color: $disabledColor;
+      border-color: transparent;
       box-shadow: none;
+
+      &:hover {
+        color: red;
+        border-color: transparent;
+      }
     }
   }
 

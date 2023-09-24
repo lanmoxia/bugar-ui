@@ -61,7 +61,7 @@ const props = defineProps({
 
 const { iconType } = props
 const iconSize = computed(() => {
-  return iconType === 'clear' || 'search' ? '22px' : '18px'
+  return iconType === 'clear' && 'search' ? '22px' : '18px'
 })
 const shouldDisplayIcon = computed(() => {
   return props.modelValue && iconType === 'clear' || iconType === 'suffix' || iconType === 'search'
