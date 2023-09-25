@@ -8,6 +8,7 @@ const InputDemo = () => import('./components/InputDemo.vue')
 const GridDemo = () => import('./components/GridDemo.vue')
 const PageDemo = () => import('./components/PageDemo.vue')
 const RadioDemo = () => import('./components/RadioDemo.vue')
+const SelectDemo = () => import('./components/SelectDemo.vue')
 const intro = () => import('./markdown/intro.md')
 const install = () => import('./markdown/install.md')
 const started = () => import('./markdown/started.md')
@@ -32,6 +33,7 @@ export const router = createRouter({
         { path: 'grid', component: GridDemo },
         { path: 'page', component: PageDemo },
         { path: 'radio', component: RadioDemo },
+        { path: 'select', component: SelectDemo },
       ]
     }
   ]

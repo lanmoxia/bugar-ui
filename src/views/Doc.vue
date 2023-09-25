@@ -41,7 +41,7 @@
               <h5>Navigation</h5>
               <ul>
                 <li>
-                  <router-link to="/doc/cascade">Cascade 级联选择</router-link>
+                  <router-link to="/doc/select">Select 选择框</router-link>
                 </li>
               </ul>
             </li>
