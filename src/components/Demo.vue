@@ -1,7 +1,7 @@
 <template>
   <div class="demo">
     <h2>{{ component.__sourceCodeTitle }}</h2>
-    <div class="demo-component">
+    <div class="demo-component" :class="{ 'grid-component': isGridComponent }">
       <component :is="component" />
     </div>
     <div class="demo-actions">
@@ -28,11 +28,13 @@ const props = defineProps({
 })
 const html = ref("")
 const compTitle = ref("")
+const isGridComponent = props.component.__name?.includes('Grid') ?? false
 onMounted(() => {
   if (props.component) {
     createHtml(props.component)
   }
 })
+console.log(props.component.__name)
 const createHtml = (comp: any) => {
   compTitle.value = comp.__sourceCodeTitle
   html.value = Prism.highlight(comp.__sourceCode, Prism.languages.html, "html")
@@ -65,8 +67,12 @@ $border-color: #d9d9d9;
 
   &-component {
     padding: 0 16px 16px 16px;
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
+
+    &.grid-component {
+      display: flex;
+    }
   }
 
   &-actions {
