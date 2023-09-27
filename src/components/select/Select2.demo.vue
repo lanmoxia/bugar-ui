@@ -1,6 +1,6 @@
-<demo>常规使用</demo>
+<demo>图标反转</demo>
 <template>
-  <Select :options="options" @selected:option="selectedOption"></Select>
+  <Select :options="options" :isIcon="true"></Select>
 </template>
 
 <script setup lang="ts">
@@ -15,7 +15,4 @@ const state = reactive({
   ]
 })
 const { options } = state
-const selectedOption = (value: any) => {
-  console.log(value)
-}
 </script>
