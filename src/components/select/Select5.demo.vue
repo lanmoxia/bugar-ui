@@ -11,7 +11,8 @@ const state = reactive({
     { label: '北京' },
     { label: '上海' },
     { label: '深圳' },
-    { label: '广州' }
+    { label: '广州' },
+    { label: '北京' }
   ],
   selectedOptions: ref([])
 })
