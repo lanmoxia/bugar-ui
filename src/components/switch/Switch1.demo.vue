@@ -1,6 +1,6 @@
 <demo>常规用法</demo>
 <template>
-  <Switch v-model:value="bool" />
+  <Switch v-model:checked="bool" />
 </template>
 
 <script setup lang="ts">

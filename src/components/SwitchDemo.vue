@@ -13,6 +13,9 @@
     </section>
     <Demo :component="Switch1Demo" />
     <Demo :component="Switch2Demo" />
+    <Demo :component="Switch3Demo" />
+    <Demo :component="Switch4Demo" />
+    <Demo :component="Switch5Demo" />
   </div>
 </template>
 
@@ -20,6 +23,9 @@
 import Demo from "./Demo.vue"
 import Switch1Demo from "./switch/Switch1.demo.vue"
 import Switch2Demo from "./switch/Switch2.demo.vue"
+import Switch3Demo from "./switch/Switch3.demo.vue"
+import Switch4Demo from "./switch/Switch4.demo.vue"
+import Switch5Demo from "./switch/Switch5.demo.vue"
 </script>
 
 <style lang="scss">
