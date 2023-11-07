@@ -1,11 +1,11 @@
 <template>
   <div class="topNav">
     <router-link to="/" class="logo">
-      <SvgIcon class="icon" name="logo" />
+      <SvgIcon class="icon" name="logo" size="25" />
     </router-link>
     <div class="link-icon">
       <a href="https://github.com/lanmoxia/bugar-ui" target="_blank">
-        <SvgIcon name="github" />
+        <SvgIcon name="github" size="25" />
       </a>
     </div>
     <div v-if="menuVisible" class="toggleAside" @click="toggleMenu">

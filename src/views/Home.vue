@@ -2,7 +2,7 @@
   <div class="homeWrapper">
     <div class="container">
       <router-link to="/" class="logo">
-        <SvgIcon name="logo" />
+        <SvgIcon name="logo" size="60" />
       </router-link>
       <h1>Bugar UI</h1>
       <h2 class="describe">一 个 简 单 好 用 的 UI 组 件 库</h2>
@@ -11,7 +11,7 @@
           起步
         </router-link>
         <router-link to="/doc" class="link-item">
-          <SvgIcon name="go" />
+          <SvgIcon name="go3" size="30" />
         </router-link>
       </div>
     </div>
@@ -25,17 +25,17 @@
     <div class="features">
       <ul>
         <li>
-          <SvgIcon name="vue" />
+          <SvgIcon name="vue" size="60" />
           <h3>基于 Vue 3</h3>
           <p>使用了 Vue3 Composition API</p>
         </li>
         <li>
-          <SvgIcon name="typescript" />
+          <SvgIcon name="typescript" size="60" />
           <h3>基于 TypeScript </h3>
           <p>源代码采用 TypeScript 书写（非严格模式）</p>
         </li>
         <li>
-          <SvgIcon name="code" />
+          <SvgIcon name="code" size="60" />
           <h3>代码易读</h3>
           <p>每个组件的源代码都极其简洁</p>
         </li>
@@ -107,7 +107,7 @@ $color: rgb(100 131 159);
       justify-content: center;
       align-items: center;
       font-size: 18px;
-      padding: 8px 12px;
+      padding: 3px 10px;
 
       >.link-item {
         display: block;

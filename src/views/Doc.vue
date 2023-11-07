@@ -110,18 +110,6 @@ $color: #243d54;
       z-index: 10;
       background-image: linear-gradient(to top, #fff 0, #f3f8fd 100%);
 
-      &::after {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 1px;
-        height: 100vh;
-        background-color: rgba(0, 0, 0, 0.15);
-        z-index: 20;
-      }
-
       h5,
       h3 {
         height: 40px;
