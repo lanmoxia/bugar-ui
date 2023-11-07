@@ -1,11 +1,12 @@
 <template>
-  <div class="bugar-tabs">
-    <div class="bugar-tabs-nav" ref="container">
+  <div class="bugar-tabs" :class="{ 'bugar-tabs-column': isColumn, 'bugar-tabs-button': isButton }">
+    <div class="bugar-tabs-nav" :class="{ 'bugar-tabs-nav-column': isColumn }" ref="container">
       <div class="bugar-tabs-nav-item" :class="{ selected: t === selected }" v-for="(t, index) in titles" :key="index"
         :ref="el => { if (t === selected) selectedItem = el }" @click="select(t)">{{ t }}</div>
-      <div class="bugar-tabs-nav-indicator" ref="indicator"></div>
+      <div class="bugar-tabs-nav-indicator"
+        :class="{ 'nav-indicator-column': isColumn, 'bugar-indicator-none': isButton }" ref="indicator"></div>
     </div>
-    <div class="bugar-tabs-content">
+    <div class="bugar-tabs-content" :class="{ 'tabs-content-row': isColumn }">
       <component class="bugar-tabs-content-item" :class="{ selected: c.props && c.props.title === selected }"
         v-for="c in defaults" :is="c" />
     </div>
@@ -20,6 +21,14 @@ const props = defineProps({
   selected: {
     type: String,
     default: "导航2"
+  },
+  isColumn: {
+    type: Boolean,
+    default: false
+  },
+  isButton: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -28,18 +37,27 @@ const indicator = ref()
 const container = ref()
 
 const emit = defineEmits(['update:selected'])
+const computeIndicatorPosition = () => {
+  if (selectedItem.value) {
+    const selectedItemRect = selectedItem.value.getBoundingClientRect()
+    const containerRect = container.value.getBoundingClientRect()
 
-onMounted(() => {
-  watchEffect(() => {
-    if (selectedItem.value) {
-      const { width } = selectedItem.value.getBoundingClientRect()
+    if (props.isColumn) {
+      const { height } = selectedItemRect
+      indicator.value.style.height = height + 'px'
+      const top = selectedItemRect.top - containerRect.top
+      indicator.value.style.top = top + 'px'
+    } else {
+      const { width } = selectedItemRect
       indicator.value.style.width = width + 'px'
-
-      const { left: left1 } = container.value.getBoundingClientRect()
-      const { left: left2 } = selectedItem.value.getBoundingClientRect()
-      const left = left2 - left1
+      const left = selectedItemRect.left - containerRect.left
       indicator.value.style.left = left + 'px'
     }
+  }
+}
+onMounted(() => {
+  watchEffect(() => {
+    computeIndicatorPosition()
   })
 })
 
@@ -104,6 +122,58 @@ $border-color: #d9d9d9;
 
       &.selected {
         display: block;
+      }
+    }
+  }
+
+  &-column {
+    display: flex;
+
+    .bugar-tabs-nav-column {
+      display: flex;
+      flex-direction: column;
+      border-bottom: none;
+      border-right: 1px solid $border-color;
+      margin-right: 8px;
+
+      .nav-indicator-column {
+        left: calc(100% - 1px);
+        width: 3px;
+      }
+
+      .bugar-tabs-nav-item {
+        padding: 0;
+        margin: 8px;
+      }
+    }
+  }
+
+  &.bugar-tabs-button {
+
+    .bugar-tabs-nav {
+      .bugar-indicator-none {
+        background: transparent;
+      }
+    }
+
+    .bugar-tabs-nav-item {
+      border: 1px solid #e4e7ed;
+      padding: 8px 10px;
+      margin: 0;
+      border-bottom: none;
+
+      &:not(:last-child) {
+        margin-right: -1px;
+      }
+
+      &.selected {
+        background: $blue;
+        color: white;
+        transition: all 350ms;
+      }
+
+      &:first-child {
+        padding: 8px;
       }
     }
   }

@@ -12,12 +12,16 @@
       <h2>代码示例</h2>
     </section>
     <Demo :component="Tabs1Demo" />
+    <Demo :component="Tabs2Demo" />
+    <Demo :component="Tabs3Demo" />
   </div>
 </template>
 
 <script setup lang="ts">
 import Demo from "./Demo.vue"
 import Tabs1Demo from "./tabs/Tabs1.demo.vue"
+import Tabs2Demo from "./tabs/Tabs2.demo.vue"
+import Tabs3Demo from "./tabs/Tabs3.demo.vue"
 </script>
 
 <style lang="scss">
