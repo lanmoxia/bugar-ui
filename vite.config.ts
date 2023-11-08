@@ -24,6 +24,8 @@ const vueDemoPlugin = {
 }
 
 export default defineConfig({
+  base: './',
+  assetsDir: 'assets',
   plugins: [
     vue({ include: [/\.vue$/, /\.md$/] }),
     Markdown(),
